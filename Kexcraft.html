@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KexCraft Studio — India's #1 AI Web Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:#FAF7F0; --cream2:#F3EDE0; --cream3:#EBE2CC; --parchment:#E0D4B8;
+  --gold:#B8923A; --gold-l:#D4AA50; --gold-s:#F2CC6A; --gold-m:#8A6B28;
+  --deep:#1A1508; --bark:#2C1E08; --mocha:#3A2910; --espresso:#4A3520;
+  --text:#261C08; --text2:#5A4828; --text3:#8A7050;
+  --border:rgba(184,146,58,.16); --border2:rgba(184,146,58,.32);
+  --green:#2d7a3a; --font:'Jost',sans-serif; --serif:'Cormorant Garamond',Georgia,serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--text);font-family:var(--font);overflow-x:hidden;cursor:none;}
+
+/* ── GRAIN ── */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:7000;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.022'/%3E%3C/svg%3E");opacity:.5;}
+
+/* ── CURSOR ── */
+.cur{position:fixed;top:0;left:0;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:multiply;transition:transform .15s;}
+.cur-r{position:fixed;top:0;left:0;width:32px;height:32px;border:1.5px solid rgba(184,146,58,.4);border-radius:50%;pointer-events:none;z-index:9998;transition:width .2s,height .2s;}
+
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--cream2);}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px;}
+
+/* ═══════════════════════════════════
+   FESTIVE BANNER
+═══════════════════════════════════ */
+.festive-bar{
+  background:linear-gradient(90deg,#7c1c0a,#c4340f,#e8520a,#c4340f,#7c1c0a);
+  background-size:300% 100%;
+  animation:festiveSlide 4s linear infinite;
+  color:#fff;text-align:center;padding:10px 24px;
+  font-size:.78rem;font-weight:600;letter-spacing:1.5px;
+  position:relative;z-index:900;overflow:hidden;
+}
+.festive-bar::before{content:'🪔 ✨ 🎆';position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:.9rem;}
+.festive-bar::after{content:'🎆 ✨ 🪔';position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:.9rem;}
+.festive-bar strong{color:var(--gold-s);}
+@keyframes festiveSlide{0%{background-position:0%}100%{background-position:300%}}
+.festive-bar .close-fest{position:absolute;right:50px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:1rem;}
+
+/* ═══════════════════════════════════
+   URGENCY BAR
+═══════════════════════════════════ */
+.urgency-bar{background:var(--deep);color:var(--gold-l);text-align:center;padding:9px 24px;font-size:.76rem;font-weight:600;letter-spacing:1.2px;}
+.urgency-bar strong{color:var(--gold-s);}
+#countdown{color:var(--gold-s);font-family:var(--serif);font-size:.9rem;font-weight:700;letter-spacing:2px;}
+
+/* ═══════════════════════════════════
+   NAV
+═══════════════════════════════════ */
+nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;padding:16px 64px;background:rgba(250,247,240,.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:padding .3s,box-shadow .3s;}
+nav.scrolled{padding:12px 64px;box-shadow:0 4px 30px rgba(26,21,8,.08);}
+.logo{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--deep);text-decoration:none;letter-spacing:.3px;}
+.logo em{color:var(--gold);font-style:italic;}
+.nav-links{list-style:none;display:flex;align-items:center;gap:28px;}
+.nav-links a{text-decoration:none;color:var(--text3);font-size:.76rem;font-weight:500;letter-spacing:.7px;text-transform:uppercase;transition:color .25s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .3s;transform-origin:left;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-cta{background:var(--deep)!important;color:var(--gold-l)!important;padding:10px 22px;border-radius:3px;font-weight:600!important;transition:all .3s!important;}
+.nav-cta:hover{background:var(--mocha)!important;box-shadow:0 4px 18px rgba(26,21,8,.22)!important;}
+.nav-cta::after{display:none!important;}
+
+/* ═══════════════════════════════════
+   PAGE SYSTEM
+═══════════════════════════════════ */
+.page{display:none;min-height:100vh;}
+.page.active{display:block;}
+
+/* ═══════════════════════════════════
+   CINEMATIC HERO
+═══════════════════════════════════ */
+.hero{min-height:100vh;background:linear-gradient(155deg,var(--cream) 0%,var(--cream2) 50%,var(--cream3) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:160px 48px 100px;position:relative;overflow:hidden;}
+.hero-particles{position:absolute;inset:0;pointer-events:none;}
+.particle{position:absolute;width:2px;height:2px;background:var(--gold);border-radius:50%;opacity:0;animation:floatUp var(--dur,8s) var(--del,0s) infinite;}
+@keyframes floatUp{0%{opacity:0;transform:translateY(100px) scale(0);}20%{opacity:.6;}80%{opacity:.3;}100%{opacity:0;transform:translateY(-200px) scale(1.5);}}
+.hero-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 75% 55% at 50% -5%,rgba(184,146,58,.09),transparent 60%),radial-gradient(ellipse 50% 45% at 90% 80%,rgba(176,132,54,.07),transparent 55%);}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(184,146,58,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(184,146,58,.055) 1px,transparent 1px);background-size:72px 72px;}
+.hero-grid::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 85% 65% at 50% 50%,transparent 30%,var(--cream) 75%);}
+.hero::before{content:'';position:absolute;top:100px;left:60px;right:60px;bottom:90px;border:1px solid rgba(184,146,58,.09);pointer-events:none;animation:borderPulse 4s ease-in-out infinite;}
+@keyframes borderPulse{0%,100%{opacity:.5;}50%{opacity:1;}}
+
+.badge{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--border2);background:rgba(184,146,58,.07);padding:8px 20px;border-radius:2px;font-size:.7rem;font-weight:600;letter-spacing:2.5px;color:var(--gold-m);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:cinUp .9s .2s ease forwards;}
+.dot-g{width:5px;height:5px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.3;transform:scale(1.8);}}
+
+.hero h1{font-family:var(--serif);font-size:clamp(3rem,7.5vw,7.2rem);font-weight:600;line-height:.97;letter-spacing:-2.5px;color:var(--deep);margin-bottom:24px;opacity:0;animation:cinUp .9s .3s ease forwards;}
+.hero h1 .it{font-style:italic;color:var(--gold);display:inline-block;animation:goldShimmer 3s 1.2s ease-in-out infinite;}
+@keyframes goldShimmer{0%,100%{color:var(--gold);}50%{color:var(--gold-s);}}
+.hero h1 .thin{font-weight:400;color:var(--text2);}
+
+.gold-rule{width:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 24px;opacity:0;animation:ruleExpand 1.2s .6s ease forwards;}
+@keyframes ruleExpand{to{width:80px;opacity:1;}}
+
+.hero-sub{font-size:1.05rem;color:var(--text3);max-width:540px;line-height:1.82;font-weight:300;margin-bottom:48px;opacity:0;animation:cinUp .9s .5s ease forwards;}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:cinUp .9s .7s ease forwards;}
+.btn-g{background:var(--deep);color:var(--gold-l);padding:16px 38px;border-radius:3px;text-decoration:none;font-size:.8rem;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;transition:all .4s;border:1px solid var(--deep);box-shadow:0 8px 30px rgba(26,21,8,.16);position:relative;overflow:hidden;}
+.btn-g::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.07) 50%,transparent 70%);transform:translateX(-100%);transition:transform .6s;}
+.btn-g:hover{background:var(--mocha);transform:translateY(-3px);box-shadow:0 16px 44px rgba(26,21,8,.28);}
+.btn-g:hover::before{transform:translateX(100%);}
+.btn-o{background:transparent;color:var(--deep);padding:16px 38px;border-radius:3px;text-decoration:none;font-size:.8rem;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;transition:all .3s;border:1px solid var(--border2);}
+.btn-o:hover{background:rgba(184,146,58,.08);border-color:var(--gold);color:var(--gold-m);transform:translateY(-3px);}
+
+.hero-stats{display:flex;gap:60px;margin-top:72px;opacity:0;animation:cinUp .9s .9s ease forwards;}
+.hs-n{font-family:var(--serif);font-size:2.6rem;font-weight:700;color:var(--gold);display:block;line-height:1;animation:countUp 2s 1s ease both;}
+.hs-l{font-size:.68rem;color:var(--text3);margin-top:5px;letter-spacing:1.5px;text-transform:uppercase;}
+
+@keyframes cinUp{from{opacity:0;transform:translateY(32px);}to{opacity:1;transform:translateY(0);}}
+@keyframes countUp{from{opacity:0;transform:scale(.8);}to{opacity:1;transform:scale(1);}}
+
+/* scroll indicator */
+.scroll-ind{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.5;animation:cinUp .9s 1.2s ease forwards;}
+.scroll-ind span{font-size:.64rem;letter-spacing:2px;text-transform:uppercase;color:var(--text3);}
+.scroll-line{width:1px;height:40px;background:linear-gradient(180deg,var(--gold),transparent);animation:scrollPulse 2s infinite;}
+@keyframes scrollPulse{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform:scaleY(1);transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+/* ── CLIENT LOGOS ── */
+.logos-strip{background:var(--deep);padding:24px 64px;border-top:1px solid rgba(184,146,58,.1);}
+.logos-label{text-align:center;font-size:.64rem;font-weight:700;letter-spacing:3px;color:rgba(184,146,58,.4);text-transform:uppercase;margin-bottom:16px;}
+.logos-row{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;}
+.logo-pill{background:rgba(184,146,58,.07);border:1px solid rgba(184,146,58,.12);border-radius:3px;padding:7px 18px;font-family:var(--serif);font-size:.9rem;font-weight:600;color:rgba(234,220,180,.32);letter-spacing:.5px;transition:all .3s;cursor:default;}
+.logo-pill:hover{color:var(--gold-l);border-color:rgba(184,146,58,.28);}
+
+/* ═══════════════════════════════════
+   SECTIONS BASE
+═══════════════════════════════════ */
+section{padding:96px 64px;}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:0 64px;}
+.sec-label{font-size:.66rem;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.sec-label::before,.sec-label::after{content:'';flex:1;max-width:36px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);}
+.sec-label.c{justify-content:center;}.sec-label.c::after{background:linear-gradient(90deg,transparent,var(--gold));}
+.sec-title{font-family:var(--serif);font-size:clamp(1.9rem,4vw,3.2rem);font-weight:600;letter-spacing:-.5px;line-height:1.06;color:var(--deep);margin-bottom:14px;}
+.sec-title em{font-style:italic;color:var(--gold);}
+.sec-sub{color:var(--text3);font-size:.97rem;line-height:1.8;max-width:520px;font-weight:300;}
+.ct{text-align:center;}.ct .sec-sub{margin:0 auto;}
+
+/* ═══════════════════════════════════
+   SERVICES ACCORDION
+═══════════════════════════════════ */
+.svc-bg{background:var(--cream2);}
+.svc-cats{display:flex;flex-direction:column;gap:2px;margin-top:56px;}
+.svc-cat{background:var(--cream);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .3s;}
+.svc-cat:hover{transform:translateX(3px);}
+.svc-cat.open{border-color:var(--border2);box-shadow:0 8px 40px rgba(184,146,58,.09);transform:none;}
+.svc-hdr{padding:26px 34px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background .25s;user-select:none;}
+.svc-hdr:hover{background:rgba(184,146,58,.04);}
+.svc-left{display:flex;align-items:center;gap:18px;}
+.svc-ico{font-size:1.7rem;flex-shrink:0;}
+.svc-cat-title{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--deep);}
+.svc-cat-sub{font-size:.8rem;color:var(--text3);margin-top:2px;}
+.svc-count{background:rgba(184,146,58,.1);border:1px solid var(--border);color:var(--gold-m);font-size:.66rem;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:2px;flex-shrink:0;}
+.svc-arrow{color:var(--gold);margin-left:14px;font-size:1.2rem;transition:transform .35s;flex-shrink:0;}
+.svc-cat.open .svc-arrow{transform:rotate(45deg);}
+.svc-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1);}
+.svc-cat.open .svc-body{max-height:2400px;}
+.svc-body-inner{padding:0 34px 34px;border-top:1px solid var(--border);}
+.svc-intro{padding:22px 0 24px;color:var(--text2);font-size:.93rem;line-height:1.78;font-weight:300;max-width:680px;}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(256px,1fr));gap:14px;}
+.svc-item{background:var(--cream2);border:1px solid var(--border);border-radius:5px;padding:20px 22px;transition:border-color .3s,transform .3s;position:relative;overflow:hidden;}
+.svc-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold-l),var(--gold-m));opacity:0;transition:opacity .3s;}
+.svc-item:hover{border-color:var(--border2);transform:translateX(4px);}
+.svc-item:hover::before{opacity:1;}
+.svc-nm{font-weight:600;font-size:.88rem;color:var(--deep);margin-bottom:6px;display:flex;align-items:center;gap:7px;}
+.svc-desc{color:var(--text3);font-size:.8rem;line-height:1.62;}
+.svc-tag{display:inline-block;margin-top:10px;font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:2px;background:rgba(184,146,58,.1);color:var(--gold-m);border:1px solid var(--border);}
+
+/* ═══════════════════════════════════
+   BLOG SECTION
+═══════════════════════════════════ */
+.blog-bg{background:var(--cream);}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px;}
+.blog-card{background:var(--cream2);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:transform .4s cubic-bezier(.2,0,.2,1),border-color .3s,box-shadow .4s;cursor:pointer;}
+.blog-card:hover{transform:translateY(-8px) scale(1.01);border-color:var(--border2);box-shadow:0 20px 60px rgba(184,146,58,.12);}
+.blog-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden;}
+.blog-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(26,21,8,.3));}
+.blog-cat{position:absolute;top:14px;left:14px;background:var(--gold);color:var(--deep);font-size:.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:2px;z-index:1;}
+.blog-body{padding:24px;}
+.blog-meta{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.blog-date{font-size:.72rem;color:var(--text3);}
+.blog-read{font-size:.72rem;color:var(--gold-m);font-weight:600;}
+.blog-title{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--deep);line-height:1.3;margin-bottom:10px;transition:color .2s;}
+.blog-card:hover .blog-title{color:var(--gold-m);}
+.blog-excerpt{font-size:.84rem;color:var(--text3);line-height:1.68;margin-bottom:16px;font-weight:300;}
+.blog-link{font-size:.76rem;font-weight:700;color:var(--gold-m);letter-spacing:.5px;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:6px;transition:gap .2s;}
+.blog-card:hover .blog-link{gap:10px;}
+
+/* ═══════════════════════════════════
+   CASE STUDIES
+═══════════════════════════════════ */
+.cases-bg{background:var(--bark);}
+.cases-bg .sec-title{color:var(--cream);}
+.cases-bg .sec-sub{color:rgba(234,220,180,.5);}
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(184,146,58,.1);border:1px solid rgba(184,146,58,.12);border-radius:8px;overflow:hidden;margin-top:56px;}
+.case-card{background:var(--mocha);padding:36px 32px;position:relative;overflow:hidden;transition:background .3s;cursor:pointer;}
+.case-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold-l),transparent);opacity:0;transition:opacity .3s;}
+.case-card:hover{background:#4e3a18;}
+.case-card:hover::before{opacity:1;}
+.case-tag{font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-m);margin-bottom:14px;}
+.case-ico{font-size:2.5rem;margin-bottom:16px;display:block;}
+.case-card h3{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--cream);margin-bottom:10px;}
+.case-card p{color:rgba(234,220,180,.5);font-size:.84rem;line-height:1.68;font-weight:300;margin-bottom:20px;}
+.case-results{display:flex;gap:14px;flex-wrap:wrap;}
+.case-stat{background:rgba(184,146,58,.1);border:1px solid rgba(184,146,58,.18);border-radius:4px;padding:8px 12px;text-align:center;}
+.case-stat-n{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--gold-l);}
+.case-stat-l{font-size:.6rem;color:rgba(184,146,58,.5);letter-spacing:.8px;text-transform:uppercase;}
+
+/* ═══════════════════════════════════
+   INSTAGRAM FEED
+═══════════════════════════════════ */
+.ig-bg{background:var(--cream2);}
+.ig-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;}
+.ig-handle{display:flex;align-items:center;gap:12px;}
+.ig-av{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.ig-name{font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--deep);}
+.ig-sub{font-size:.76rem;color:var(--text3);}
+.ig-follow{background:var(--deep);color:var(--gold-l);padding:9px 20px;border-radius:3px;text-decoration:none;font-size:.76rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all .3s;}
+.ig-follow:hover{background:var(--mocha);}
+.ig-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;}
+.ig-post{aspect-ratio:1;border-radius:4px;overflow:hidden;position:relative;cursor:pointer;}
+.ig-post-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2rem;transition:transform .4s;}
+.ig-post:hover .ig-post-inner{transform:scale(1.1);}
+.ig-post-overlay{position:absolute;inset:0;background:rgba(26,21,8,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;font-size:.8rem;color:#fff;flex-direction:column;gap:4px;}
+.ig-post:hover .ig-post-overlay{opacity:1;}
+.ig-post:nth-child(1) .ig-post-inner{background:linear-gradient(135deg,#d4c5a0,#b8a070);}
+.ig-post:nth-child(2) .ig-post-inner{background:linear-gradient(135deg,#2a1a08,#3d2810);}
+.ig-post:nth-child(3) .ig-post-inner{background:linear-gradient(135deg,#c8d4c0,#a0b898);}
+.ig-post:nth-child(4) .ig-post-inner{background:linear-gradient(135deg,#d0c8b8,#b8a898);}
+.ig-post:nth-child(5) .ig-post-inner{background:linear-gradient(135deg,#2c2010,#4a3820);}
+.ig-post:nth-child(6) .ig-post-inner{background:linear-gradient(135deg,#c0d0d8,#90a8b8);}
+
+/* ═══════════════════════════════════
+   AI FEATURES
+═══════════════════════════════════ */
+.ai-bg{background:var(--bark);}
+.ai-bg .sec-title{color:var(--cream);}
+.ai-bg .sec-sub{color:rgba(234,220,180,.5);}
+.ai-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(184,146,58,.1);border:1px solid rgba(184,146,58,.12);border-radius:8px;overflow:hidden;margin-top:56px;}
+.ai-card{background:var(--mocha);padding:34px 28px;transition:background .3s,transform .4s;position:relative;overflow:hidden;}
+.ai-card::before{content:'';position:absolute;top:-30px;right:-30px;width:80px;height:80px;background:radial-gradient(circle,rgba(184,146,58,.12),transparent 70%);}
+.ai-card:hover{background:#4e3a18;transform:translateY(-4px);}
+.ai-ico{font-size:1.7rem;margin-bottom:16px;display:block;}
+.ai-num{font-family:var(--serif);font-size:3.2rem;font-weight:700;color:rgba(184,146,58,.09);line-height:1;margin-bottom:8px;}
+.ai-card h3{font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--cream);margin-bottom:8px;}
+.ai-card p{color:rgba(234,220,180,.45);font-size:.82rem;line-height:1.65;font-weight:300;}
+
+/* ═══════════════════════════════════
+   ROI CALCULATOR
+═══════════════════════════════════ */
+.roi-bg{background:var(--cream);}
+.roi-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:56px;}
+.roi-form{background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:40px;}
+.roi-form h4{font-family:var(--serif);font-size:1.4rem;font-weight:600;color:var(--deep);margin-bottom:28px;}
+.roi-field{margin-bottom:22px;}
+.roi-field label{display:block;font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
+.roi-field select,.roi-field input[type=range]{width:100%;background:var(--cream);border:1px solid var(--border2);border-radius:4px;padding:11px 14px;color:var(--deep);font-family:var(--font);font-size:.88rem;outline:none;transition:border-color .25s;appearance:none;}
+.roi-field select:focus{border-color:var(--gold);}
+input[type=range]{padding:0;height:4px;cursor:pointer;accent-color:var(--gold);}
+.range-labels{display:flex;justify-content:space-between;font-size:.7rem;color:var(--text3);margin-top:6px;}
+.roi-results{background:var(--deep);border-radius:8px;padding:40px;position:relative;overflow:hidden;}
+.roi-results::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(184,146,58,.08),transparent 65%);}
+.roi-results h4{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--cream);margin-bottom:28px;}
+.roi-metric{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid rgba(184,146,58,.12);}
+.roi-metric:last-child{border:none;margin-bottom:0;padding-bottom:0;}
+.roi-metric-label{font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(184,146,58,.5);margin-bottom:8px;}
+.roi-metric-value{font-family:var(--serif);font-size:2.2rem;font-weight:700;color:var(--gold-l);line-height:1;transition:all .5s;}
+.roi-metric-sub{font-size:.78rem;color:rgba(234,220,180,.4);margin-top:4px;font-weight:300;}
+.roi-cta-btn{display:block;text-align:center;background:var(--gold);color:var(--deep);padding:15px;border-radius:4px;text-decoration:none;font-weight:700;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;margin-top:28px;transition:all .3s;}
+.roi-cta-btn:hover{background:var(--gold-s);box-shadow:0 8px 28px rgba(184,146,58,.35);}
+
+/* ═══════════════════════════════════
+   PORTFOLIO DEMOS
+═══════════════════════════════════ */
+.port-bg{background:var(--cream2);}
+.port-tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:40px 0 44px;}
+.tab-btn{background:var(--cream);border:1px solid var(--border);color:var(--text3);padding:10px 20px;border-radius:3px;font-size:.74rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;transition:all .25s;font-family:var(--font);}
+.tab-btn:hover,.tab-btn.active{background:var(--deep);color:var(--gold-l);border-color:var(--deep);box-shadow:0 4px 16px rgba(26,21,8,.18);}
+.demo-panel{display:none;animation:cinUp .4s ease both;}
+.demo-panel.active{display:block;}
+.demo-wrap{border:1px solid var(--border2);border-radius:10px;overflow:hidden;box-shadow:0 24px 80px rgba(26,21,8,.14);}
+.demo-bar-ui{background:var(--cream3);padding:12px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);}
+.ddot{width:11px;height:11px;border-radius:50%;display:inline-block;margin-right:4px;}
+.d1{background:#ff5f57;}.d2{background:#febc2e;}.d3{background:#28c840;}
+.demo-url{background:rgba(26,21,8,.06);border-radius:4px;padding:5px 16px;font-size:.72rem;color:var(--text3);flex:1;text-align:center;letter-spacing:.3px;}
+.demo-frame{width:100%;height:500px;border:none;display:block;}
+
+/* ═══════════════════════════════════
+   TEAM
+═══════════════════════════════════ */
+.team-bg{background:var(--cream);}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:56px;}
+.team-card{background:var(--cream2);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:transform .4s cubic-bezier(.2,0,.2,1),border-color .3s,box-shadow .4s;}
+.team-card:hover{transform:translateY(-8px);border-color:var(--border2);box-shadow:0 20px 52px rgba(184,146,58,.12);}
+.team-avatar{height:180px;display:flex;align-items:center;justify-content:center;font-size:3.8rem;position:relative;overflow:hidden;}
+.team-avatar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:50px;background:linear-gradient(transparent,var(--cream2));}
+.team-body{padding:20px 22px;}
+.team-name{font-family:var(--serif);font-size:1.12rem;font-weight:600;color:var(--deep);margin-bottom:3px;}
+.team-role{font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold-m);margin-bottom:9px;}
+.team-bio{font-size:.8rem;color:var(--text3);line-height:1.63;font-weight:300;}
+.team-socials{display:flex;gap:7px;margin-top:12px;}
+.ts{width:28px;height:28px;background:rgba(184,146,58,.08);border:1px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:.72rem;text-decoration:none;transition:border-color .2s,transform .2s;}
+.ts:hover{border-color:var(--gold);transform:translateY(-2px);}
+
+/* ═══════════════════════════════════
+   AWARDS
+═══════════════════════════════════ */
+.awards-bg{background:var(--deep);}
+.awards-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:44px;}
+.award-card{background:rgba(184,146,58,.06);border:1px solid rgba(184,146,58,.13);border-radius:6px;padding:22px 14px;text-align:center;transition:border-color .3s,transform .4s,box-shadow .3s;}
+.award-card:hover{border-color:rgba(184,146,58,.28);transform:translateY(-4px);box-shadow:0 12px 36px rgba(184,146,58,.08);}
+.award-ico{font-size:1.9rem;margin-bottom:10px;display:block;}
+.award-title{font-family:var(--serif);font-size:.9rem;font-weight:600;color:var(--cream);margin-bottom:4px;}
+.award-sub{font-size:.7rem;color:rgba(184,146,58,.45);letter-spacing:.5px;}
+.guarantee-row{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:44px;flex-wrap:wrap;}
+.guar{display:flex;align-items:center;gap:12px;background:rgba(184,146,58,.07);border:1px solid rgba(184,146,58,.13);border-radius:4px;padding:14px 20px;transition:border-color .3s;}
+.guar:hover{border-color:rgba(184,146,58,.25);}
+.guar-ico{font-size:1.4rem;flex-shrink:0;}
+.guar-title{font-size:.8rem;font-weight:600;color:var(--cream);}
+.guar-sub{font-size:.7rem;color:rgba(234,220,180,.38);margin-top:2px;}
+
+/* ═══════════════════════════════════
+   PROCESS
+═══════════════════════════════════ */
+.proc-bg{background:var(--cream2);}
+.proc-row{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;margin-top:56px;position:relative;}
+.proc-row::before{content:'';position:absolute;top:43px;left:9%;right:9%;height:1px;background:linear-gradient(90deg,transparent,var(--gold-l),transparent);opacity:.35;pointer-events:none;}
+.proc-step{text-align:center;}
+.proc-ico{width:86px;height:86px;margin:0 auto 20px;background:var(--cream);border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;position:relative;z-index:1;transition:border-color .3s,box-shadow .4s,transform .4s;}
+.proc-step:hover .proc-ico{border-color:var(--gold);box-shadow:0 0 0 8px rgba(184,146,58,.07);transform:translateY(-5px) rotate(5deg);}
+.proc-step h4{font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--deep);margin-bottom:7px;}
+.proc-step p{color:var(--text3);font-size:.8rem;line-height:1.62;}
+
+/* ═══════════════════════════════════
+   PRICING
+═══════════════════════════════════ */
+.price-bg{background:var(--cream);}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1040px;margin:56px auto 0;}
+.pc{background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:42px 34px;position:relative;transition:transform .4s cubic-bezier(.2,0,.2,1),box-shadow .4s;}
+.pc:hover{transform:translateY(-8px);box-shadow:0 20px 56px rgba(184,146,58,.12);}
+.pc.hot{background:var(--deep);border-color:rgba(184,146,58,.28);}
+.pc.hot::before{content:'★ MOST POPULAR';position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--deep);font-size:.58rem;font-weight:800;letter-spacing:2px;padding:4px 14px;border-radius:2px;}
+.pc-plan{font-size:.66rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);margin-bottom:14px;}
+.pc.hot .pc-plan{color:rgba(240,200,100,.5);}
+.pc-price{font-family:var(--serif);font-size:3rem;font-weight:700;color:var(--deep);line-height:1;margin-bottom:5px;}
+.pc.hot .pc-price{color:var(--gold-l);}
+.pc-price sup{font-size:1.2rem;color:var(--text3);}
+.pc-note{font-size:.78rem;color:var(--text3);margin-bottom:28px;}
+.pc.hot .pc-note{color:rgba(240,200,100,.45);}
+.pc-feat{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:32px;}
+.pc-feat li{font-size:.858rem;color:var(--text2);display:flex;align-items:center;gap:10px;}
+.pc.hot .pc-feat li{color:rgba(240,220,170,.75);}
+.pc-feat li::before{content:'✦';color:var(--gold);font-size:.58rem;flex-shrink:0;}
+.pc-feat li.no-f{color:var(--text3);opacity:.45;}
+.pc-feat li.no-f::before{content:'—';color:var(--text3);}
+.pc-btn{display:block;text-align:center;text-decoration:none;padding:14px;border-radius:3px;font-weight:600;font-size:.78rem;letter-spacing:1.2px;text-transform:uppercase;transition:all .3s;border:1px solid var(--border2);color:var(--deep);}
+.pc-btn:hover{background:rgba(184,146,58,.08);border-color:var(--gold);}
+.pc-btn.hb{background:var(--gold);color:var(--deep);border-color:var(--gold);}
+.pc-btn.hb:hover{background:var(--gold-s);box-shadow:0 8px 28px rgba(184,146,58,.3);transform:translateY(-2px);}
+
+/* ═══════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════ */
+.testi-bg{background:var(--cream2);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px;}
+.tc{background:var(--cream);border:1px solid var(--border);border-radius:7px;padding:34px;transition:transform .4s,border-color .3s,box-shadow .4s;}
+.tc:hover{transform:translateY(-6px);border-color:var(--border2);box-shadow:0 16px 48px rgba(184,146,58,.1);}
+.tc-stars{color:var(--gold);font-size:.85rem;letter-spacing:3px;margin-bottom:14px;}
+.tc-q{font-family:var(--serif);font-size:2rem;color:var(--gold-l);opacity:.25;line-height:1;margin-bottom:6px;}
+.tc-text{color:var(--text2);font-size:.875rem;line-height:1.78;margin-bottom:22px;font-weight:300;font-style:italic;}
+.tc-author{display:flex;align-items:center;gap:12px;}
+.tc-av{width:42px;height:42px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--gold),var(--gold-m));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:.95rem;color:var(--cream);}
+.tc-name{font-weight:600;font-size:.86rem;color:var(--deep);}
+.tc-role{font-size:.74rem;color:var(--text3);margin-top:2px;}
+
+/* ═══════════════════════════════════
+   FAQ
+═══════════════════════════════════ */
+.faq-bg{background:var(--cream);}
+.faq-wrap{max-width:760px;margin:56px auto 0;}
+.faq-item{border:1px solid var(--border);border-radius:5px;margin-bottom:10px;overflow:hidden;transition:border-color .3s;}
+.faq-item.open{border-color:var(--border2);box-shadow:0 4px 18px rgba(184,146,58,.07);}
+.faq-q{padding:20px 30px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-weight:600;font-size:.92rem;color:var(--deep);transition:background .2s;user-select:none;}
+.faq-q:hover{background:rgba(184,146,58,.04);}
+.faq-icon{font-family:var(--serif);font-size:1.4rem;color:var(--gold);transition:transform .35s;flex-shrink:0;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.faq-item.open .faq-a{max-height:300px;}
+.faq-a p{padding:0 30px 22px;color:var(--text3);font-size:.875rem;line-height:1.8;font-weight:300;}
+
+/* ═══════════════════════════════════
+   CONTACT
+═══════════════════════════════════ */
+.contact-bg{background:var(--cream2);}
+.contact-inner{display:grid;grid-template-columns:1fr 1.2fr;gap:72px;align-items:start;}
+.contact-info h3{font-family:var(--serif);font-size:1.9rem;font-weight:600;color:var(--deep);margin-bottom:14px;line-height:1.15;}
+.contact-info p{color:var(--text3);font-size:.9rem;line-height:1.8;margin-bottom:32px;font-weight:300;}
+.c-channels{display:flex;flex-direction:column;gap:12px;}
+.c-ch{display:flex;align-items:center;gap:16px;background:var(--cream);border:1px solid var(--border);border-radius:5px;padding:16px 22px;text-decoration:none;color:var(--text);transition:border-color .3s,transform .4s,box-shadow .3s;}
+.c-ch:hover{border-color:var(--border2);transform:translateX(8px);box-shadow:0 4px 16px rgba(184,146,58,.09);}
+.c-ch-ico{font-size:1.3rem;flex-shrink:0;}
+.c-ch-title{font-weight:600;font-size:.86rem;color:var(--deep);}
+.c-ch-sub{font-size:.75rem;color:var(--text3);margin-top:2px;}
+.contact-form{background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:40px;}
+.contact-form h4{font-family:var(--serif);font-size:1.4rem;font-weight:600;color:var(--deep);margin-bottom:28px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.fg{display:flex;flex-direction:column;gap:7px;margin-bottom:16px;}
+.fg label{font-size:.66rem;font-weight:700;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;}
+.fg input,.fg select,.fg textarea{background:var(--cream2);border:1px solid var(--border);border-radius:3px;padding:12px 14px;color:var(--deep);font-family:var(--font);font-size:.875rem;outline:none;transition:border-color .25s,background .25s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);background:var(--cream);}
+.fg select option{background:var(--cream2);}
+.fg textarea{resize:vertical;min-height:100px;}
+.form-submit{background:var(--deep);color:var(--gold-l);font-weight:600;padding:14px 32px;border-radius:3px;border:none;cursor:pointer;font-family:var(--font);font-size:.78rem;width:100%;letter-spacing:1.8px;text-transform:uppercase;transition:all .3s;position:relative;overflow:hidden;}
+.form-submit::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.06) 50%,transparent 70%);transform:translateX(-100%);transition:transform .6s;}
+.form-submit:hover{background:var(--mocha);box-shadow:0 8px 28px rgba(26,21,8,.22);transform:translateY(-2px);}
+.form-submit:hover::before{transform:translateX(100%);}
+
+/* ═══════════════════════════════════
+   CTA STRIP
+═══════════════════════════════════ */
+.cta-strip{background:var(--deep);padding:96px 64px;text-align:center;position:relative;overflow:hidden;}
+.cta-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 50% 50%,rgba(184,146,58,.06),transparent 65%);}
+.cta-strip h2{font-family:var(--serif);font-size:clamp(2.2rem,5vw,4.2rem);font-weight:600;color:var(--cream);letter-spacing:-.5px;margin-bottom:16px;}
+.cta-strip h2 em{font-style:italic;color:var(--gold-l);}
+.cta-strip p{color:rgba(234,220,180,.45);font-size:1rem;margin-bottom:40px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.8;font-weight:300;}
+
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+footer{background:var(--bark);border-top:1px solid rgba(184,146,58,.12);padding:56px 64px 36px;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px;}
+.footer-brand .logo{color:var(--cream);}
+.footer-brand p{color:rgba(234,220,180,.38);font-size:.83rem;line-height:1.75;margin-top:12px;max-width:250px;font-weight:300;}
+.footer-col h5{font-family:var(--serif);font-weight:600;font-size:.88rem;color:var(--cream);margin-bottom:14px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.footer-col ul a{color:rgba(234,220,180,.38);text-decoration:none;font-size:.8rem;transition:color .2s;}
+.footer-col ul a:hover{color:var(--gold-l);}
+.footer-bottom{border-top:1px solid rgba(184,146,58,.1);padding-top:24px;display:flex;align-items:center;justify-content:space-between;}
+.footer-bottom p{color:rgba(234,220,180,.28);font-size:.78rem;}
+.socials{display:flex;gap:10px;}
+.soc{width:34px;height:34px;background:rgba(184,146,58,.07);border:1px solid rgba(184,146,58,.16);border-radius:3px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:.85rem;transition:border-color .2s,transform .2s;}
+.soc:hover{border-color:var(--gold);transform:translateY(-2px);}
+
+/* ═══════════════════════════════════
+   LIVE AI CHAT WIDGET
+═══════════════════════════════════ */
+.chat-btn{position:fixed;bottom:28px;right:28px;width:58px;height:58px;background:var(--deep);border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;cursor:pointer;z-index:600;box-shadow:0 6px 28px rgba(26,21,8,.35);transition:all .3s;animation:chatPulse 3s ease-in-out infinite;}
+@keyframes chatPulse{0%,100%{box-shadow:0 6px 28px rgba(26,21,8,.35),0 0 0 0 rgba(184,146,58,.4);}50%{box-shadow:0 6px 28px rgba(26,21,8,.35),0 0 0 12px rgba(184,146,58,0);}}
+.chat-btn:hover{transform:scale(1.1);background:var(--mocha);}
+.chat-window{position:fixed;bottom:100px;right:28px;width:340px;background:var(--cream);border:1px solid var(--border2);border-radius:12px;box-shadow:0 20px 70px rgba(26,21,8,.25);z-index:600;display:none;flex-direction:column;overflow:hidden;animation:slideUp .3s ease both;}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.chat-window.open{display:flex;}
+.chat-header{background:var(--deep);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;}
+.chat-header-left{display:flex;align-items:center;gap:12px;}
+.chat-av{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-m));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;}
+.chat-name{font-family:var(--serif);font-size:.95rem;font-weight:600;color:var(--cream);}
+.chat-status{font-size:.68rem;color:rgba(234,220,180,.5);}
+.chat-status::before{content:'●';color:#4a9;margin-right:4px;font-size:.5rem;}
+.chat-close{background:none;border:none;color:rgba(234,220,180,.4);cursor:pointer;font-size:1.1rem;transition:color .2s;}
+.chat-close:hover{color:var(--cream);}
+.chat-messages{flex:1;padding:16px;display:flex;flex-direction:column;gap:12px;max-height:280px;overflow-y:auto;}
+.chat-msg{max-width:80%;padding:10px 14px;border-radius:10px;font-size:.84rem;line-height:1.55;}
+.chat-msg.bot{background:var(--cream2);border:1px solid var(--border);color:var(--text);border-bottom-left-radius:2px;}
+.chat-msg.user{background:var(--deep);color:var(--gold-l);align-self:flex-end;border-bottom-right-radius:2px;}
+.chat-quick{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 12px;}
+.quick-btn{background:var(--cream2);border:1px solid var(--border2);color:var(--gold-m);padding:6px 12px;border-radius:20px;font-size:.72rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--font);}
+.quick-btn:hover{background:rgba(184,146,58,.12);border-color:var(--gold);}
+.chat-input-row{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--border);}
+.chat-input{flex:1;background:var(--cream2);border:1px solid var(--border);border-radius:20px;padding:9px 14px;font-family:var(--font);font-size:.84rem;color:var(--deep);outline:none;transition:border-color .2s;}
+.chat-input:focus{border-color:var(--gold);}
+.chat-send{background:var(--gold);border:none;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.85rem;transition:all .2s;flex-shrink:0;}
+.chat-send:hover{background:var(--gold-s);transform:scale(1.1);}
+
+/* ═══════════════════════════════════
+   WA FLOAT
+═══════════════════════════════════ */
+.wa{position:fixed;bottom:28px;right:100px;background:#25d366;color:#fff;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;text-decoration:none;box-shadow:0 6px 24px rgba(37,211,102,.4);z-index:600;animation:waf 3s ease-in-out infinite;}
+@keyframes waf{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+
+/* ═══════════════════════════════════
+   EXIT POPUP
+═══════════════════════════════════ */
+.popup-overlay{position:fixed;inset:0;background:rgba(26,21,8,.75);z-index:9500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
+.popup-overlay.show{display:flex;animation:fadeInPop .3s ease;}
+@keyframes fadeInPop{from{opacity:0;}to{opacity:1;}}
+.popup-box{background:var(--cream);border:1px solid var(--border2);border-radius:12px;padding:52px 44px;max-width:500px;width:90%;position:relative;text-align:center;box-shadow:0 40px 100px rgba(26,21,8,.4);animation:cinUp .4s ease both;}
+.popup-close{position:absolute;top:16px;right:18px;background:none;border:none;font-size:1.3rem;color:var(--text3);cursor:pointer;}
+.popup-close:hover{color:var(--deep);}
+.popup-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(184,146,58,.1);border:1px solid var(--border2);padding:6px 16px;border-radius:2px;font-size:.67rem;font-weight:700;letter-spacing:2px;color:var(--gold-m);text-transform:uppercase;margin-bottom:18px;}
+.popup-box h2{font-family:var(--serif);font-size:2.1rem;font-weight:700;color:var(--deep);line-height:1.1;margin-bottom:12px;}
+.popup-box p{color:var(--text3);font-size:.88rem;line-height:1.72;margin-bottom:24px;font-weight:300;}
+.popup-offer{background:var(--cream2);border:1px dashed var(--gold);border-radius:6px;padding:14px 20px;margin-bottom:24px;}
+.popup-offer-txt{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--gold);}
+.popup-offer-sub{font-size:.76rem;color:var(--text3);margin-top:3px;}
+.popup-btn{display:block;background:var(--deep);color:var(--gold-l);padding:14px 28px;border-radius:3px;text-decoration:none;font-weight:600;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;transition:all .3s;margin-bottom:10px;}
+.popup-btn:hover{background:var(--mocha);}
+.popup-skip{color:var(--text3);font-size:.76rem;cursor:pointer;text-decoration:underline;}
+
+/* ═══════════════════════════════════
+   STICKY BAR
+═══════════════════════════════════ */
+.sticky-bar{position:fixed;bottom:0;left:0;right:0;z-index:500;background:var(--deep);border-top:1px solid rgba(184,146,58,.2);padding:12px 48px;display:flex;align-items:center;justify-content:space-between;transform:translateY(100%);transition:transform .5s ease;}
+.sticky-bar.vis{transform:translateY(0);}
+.sticky-bar p{color:var(--cream);font-size:.85rem;font-weight:300;}
+.sticky-bar p strong{color:var(--gold-l);font-weight:600;}
+.sticky-cta{background:var(--gold);color:var(--deep);padding:10px 24px;border-radius:3px;text-decoration:none;font-weight:700;font-size:.76rem;letter-spacing:1.5px;text-transform:uppercase;transition:all .25s;white-space:nowrap;}
+.sticky-cta:hover{background:var(--gold-s);}
+.sticky-x{background:none;border:none;color:rgba(234,220,180,.35);cursor:pointer;font-size:1.1rem;padding:0 0 0 16px;}
+
+/* ═══════════════════════════════════
+   ABOUT PAGE
+═══════════════════════════════════ */
+.page-hero{padding:160px 64px 80px;background:linear-gradient(155deg,var(--cream) 0%,var(--cream2) 100%);position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(184,146,58,.07),transparent 60%);pointer-events:none;}
+.page-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.page-hero h1{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:600;letter-spacing:-2px;line-height:1.02;margin-bottom:20px;}
+.page-hero p{color:var(--text3);font-size:1.02rem;line-height:1.8;font-weight:300;}
+.about-visual{background:var(--deep);border-radius:12px;padding:44px;border:1px solid rgba(184,146,58,.18);}
+.about-visual h3{font-family:var(--serif);font-size:1.6rem;font-weight:600;color:var(--cream);margin-bottom:20px;}
+.about-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.about-stat{background:rgba(184,146,58,.08);border:1px solid rgba(184,146,58,.15);border-radius:6px;padding:20px;text-align:center;}
+.about-stat-n{font-family:var(--serif);font-size:2.2rem;font-weight:700;color:var(--gold-l);display:block;}
+.about-stat-l{font-size:.7rem;color:rgba(184,220,180,.45);letter-spacing:1px;text-transform:uppercase;margin-top:4px;}
+.about-mission{background:var(--cream2);padding:96px 64px;}
+.mission-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.mission-inner blockquote{font-family:var(--serif);font-size:2rem;font-weight:600;color:var(--deep);line-height:1.3;font-style:italic;border-left:3px solid var(--gold);padding-left:28px;}
+.mission-inner .mission-text{color:var(--text3);font-size:.95rem;line-height:1.82;font-weight:300;}
+.values-section{background:var(--cream);padding:96px 64px;}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.value-card{background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:32px;transition:transform .4s,border-color .3s;}
+.value-card:hover{transform:translateY(-5px);border-color:var(--border2);}
+.value-ico{font-size:2rem;margin-bottom:16px;display:block;}
+.value-card h3{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--deep);margin-bottom:8px;}
+.value-card p{color:var(--text3);font-size:.84rem;line-height:1.68;font-weight:300;}
+
+/* ═══════════════════════════════════
+   SERVICES PAGE (Individual)
+═══════════════════════════════════ */
+.service-hero{padding:160px 64px 60px;background:var(--deep);position:relative;overflow:hidden;}
+.service-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(184,146,58,.06),transparent 55%);pointer-events:none;}
+.service-hero .sec-label{color:var(--gold-l);}
+.service-hero .sec-title{color:var(--cream);}
+.service-hero .sec-sub{color:rgba(234,220,180,.5);max-width:620px;}
+.svc-page-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;padding:64px;background:var(--cream2);}
+.svc-page-card{background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:28px;transition:transform .4s,border-color .3s,box-shadow .4s;}
+.svc-page-card:hover{transform:translateY(-5px);border-color:var(--border2);box-shadow:0 16px 48px rgba(184,146,58,.1);}
+.svc-page-ico{font-size:2rem;margin-bottom:14px;display:block;}
+.svc-page-card h3{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--deep);margin-bottom:8px;}
+.svc-page-card p{color:var(--text3);font-size:.84rem;line-height:1.65;margin-bottom:12px;}
+.svc-page-tag{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:2px;background:rgba(184,146,58,.1);color:var(--gold-m);border:1px solid var(--border);}
+.svc-page-price{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--gold);margin-top:12px;}
+
+/* ═══════════════════════════════════
+   BLOG PAGE
+═══════════════════════════════════ */
+.blog-page-hero{padding:160px 64px 60px;background:var(--cream2);}
+.blog-page-hero h1{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4rem);font-weight:600;letter-spacing:-2px;color:var(--deep);margin-bottom:12px;}
+.blog-page-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding:64px;}
+.blog-feat{grid-column:1/-1;background:var(--deep);border-radius:12px;overflow:hidden;display:grid;grid-template-columns:1.2fr 1fr;transition:box-shadow .4s;}
+.blog-feat:hover{box-shadow:0 20px 60px rgba(26,21,8,.3);}
+.blog-feat-img{height:100%;min-height:300px;display:flex;align-items:center;justify-content:center;font-size:6rem;background:linear-gradient(135deg,var(--mocha),var(--espresso));}
+.blog-feat-body{padding:44px;}
+.blog-feat-cat{display:inline-block;background:var(--gold);color:var(--deep);font-size:.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:2px;margin-bottom:16px;}
+.blog-feat-body h2{font-family:var(--serif);font-size:1.8rem;font-weight:600;color:var(--cream);line-height:1.2;margin-bottom:12px;}
+.blog-feat-body p{color:rgba(234,220,180,.5);font-size:.9rem;line-height:1.72;margin-bottom:20px;font-weight:300;}
+.blog-feat-link{color:var(--gold-l);font-size:.78rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:gap .2s;}
+.blog-feat-link:hover{gap:10px;}
+
+/* ═══════════════════════════════════
+   REVEAL
+═══════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.vis{opacity:1;transform:translateY(0);}
+.reveal-l{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal-l.vis{opacity:1;transform:translateX(0);}
+.reveal-r{opacity:0;transform:translateX(30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal-r.vis{opacity:1;transform:translateX(0);}
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media(max-width:960px){
+  nav{padding:12px 20px;}.nav-links{display:none;}
+  section,.page-hero,.svc-page-grid,.blog-page-grid,.values-section,.about-mission{padding:60px 20px;}
+  .hero{padding:120px 20px 70px;}
+  .hero::before{display:none;}
+  .hero-stats{gap:24px;}
+  .logos-strip{padding:20px 20px;}
+  .logos-row{gap:12px;}
+  .blog-grid,.testi-grid,.team-grid,.cases-grid{grid-template-columns:1fr;}
+  .ai-grid{grid-template-columns:1fr 1fr;}
+  .awards-grid{grid-template-columns:repeat(2,1fr);}
+  .proc-row{grid-template-columns:1fr 1fr;gap:24px;}.proc-row::before{display:none;}
+  .roi-inner,.contact-inner,.page-hero-inner,.mission-inner{grid-template-columns:1fr;}
+  .price-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .ig-grid{grid-template-columns:repeat(3,1fr);}
+  .blog-feat{grid-template-columns:1fr;}
+  .blog-page-grid{grid-template-columns:1fr;padding:40px 20px;}
+  .svc-page-grid{padding:40px 20px;}
+  .chat-window{width:calc(100vw - 40px);right:20px;}
+  .sticky-bar{padding:12px 16px;}
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-r" id="curR"></div>
+
+
+<!-- ══ URGENCY BAR ══ -->
+<div class="urgency-bar">
+  ⚡ <strong>Only 3 project slots left</strong> this month · Offer closes in <span id="countdown">23:59:47</span>
+</div>
+
+<!-- ══ EXIT POPUP ══ -->
+<div class="popup-overlay" id="exitPopup">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closePopup()">✕</button>
+    <div class="popup-badge">Wait — Special Offer</div>
+    <h2>Before You Leave,<br>Claim Your Free Audit</h2>
+    <p>We'll review your current website and send a detailed report on what's losing you customers — completely free.</p>
+    <div class="popup-offer">
+      <div class="popup-offer-txt">FREE Website Audit</div>
+      <div class="popup-offer-sub">Worth ₹2,500 · Yours at no cost</div>
+    </div>
+    <a href="#contact" class="popup-btn" onclick="closePopup();showPage('home')">Claim My Free Audit →</a>
+    <span class="popup-skip" onclick="closePopup()">No thanks, I'll pass on free value</span>
+  </div>
+</div>
+
+<!-- ══ STICKY BAR ══ -->
+<div class="sticky-bar" id="stickyBar">
+  <p>🔥 <strong>Only 3 slots left this month.</strong> Don't miss your project launch date.</p>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <a href="#contact" class="sticky-cta" onclick="showPage('home')">Get Free Quote →</a>
+    <button class="sticky-x" onclick="document.getElementById('stickyBar').style.display='none'">✕</button>
+  </div>
+</div>
+
+<!-- ══ AI CHAT WIDGET ══ -->
+<div class="chat-btn" id="chatBtn" onclick="toggleChat()" title="Chat with AI">🤖</div>
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <div class="chat-header-left">
+      <div class="chat-av">🤖</div>
+      <div>
+        <div class="chat-name">KexCraft AI</div>
+        <div class="chat-status">Online — replies instantly</div>
+      </div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">👋 Hello! I'm KexCraft's AI assistant. How can I help you today?</div>
+    <div class="chat-msg bot">I can help you with pricing, services, timelines, or anything about building your website!</div>
+  </div>
+  <div class="chat-quick">
+    <button class="quick-btn" onclick="quickReply('What are your prices?')">💰 Pricing</button>
+    <button class="quick-btn" onclick="quickReply('How long does it take?')">⏱️ Timeline</button>
+    <button class="quick-btn" onclick="quickReply('Do you make e-commerce stores?')">🛒 E-Commerce</button>
+    <button class="quick-btn" onclick="quickReply('I need a quote')">📋 Get Quote</button>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput" placeholder="Type your question..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="chat-send" onclick="sendChat()">→</button>
+  </div>
+</div>
+
+<!-- ══ WA FLOAT ══ -->
+<a href="https://wa.me/91XXXXXXXXXX" class="wa" target="_blank" title="WhatsApp">💬</a>
+
+<!-- ══ NAV ══ -->
+<nav id="mainNav">
+  <a href="#" class="logo" onclick="showPage('home');return false;">Kex<em>Craft</em> Studio</a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
+    <li><a href="#" onclick="showPage('about');return false;">About</a></li>
+    <li><a href="#" onclick="showPage('services');return false;">Services</a></li>
+    <li><a href="#" onclick="showPage('blog');return false;">Blog</a></li>
+    <li><a href="#portfolio" onclick="showPage('home');setTimeout(()=>document.getElementById('portfolio').scrollIntoView({behavior:'smooth'}),100);return false;">Portfolio</a></li>
+    <li><a href="#pricing" onclick="showPage('home');setTimeout(()=>document.getElementById('pricing').scrollIntoView({behavior:'smooth'}),100);return false;">Pricing</a></li>
+    <li><a href="#contact" class="nav-cta" onclick="showPage('home');setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),100);return false;">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- ╔══════════════════════════════════╗
+     ║         HOME PAGE               ║
+     ╚══════════════════════════════════╝ -->
+<div class="page active" id="page-home">
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-particles" id="heroParticles"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="badge"><span class="dot-g"></span> India's Premier AI-Powered Web Studio</div>
+  <h1 class="hero-h">
+    We Craft Websites<br>
+    <span class="it">That Win</span><br>
+    <span class="thin">Your Business</span>
+  </h1>
+  <div class="gold-rule"></div>
+  <p class="hero-sub">From local boutiques to funded startups — fast, beautiful, AI-integrated digital experiences that attract customers and grow revenue. Delivered in days, not months.</p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn-g" onclick="setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),10)">Begin Your Journey →</a>
+    <a href="#portfolio" class="btn-o" onclick="setTimeout(()=>document.getElementById('portfolio').scrollIntoView({behavior:'smooth'}),10)">See Our Work</a>
+  </div>
+  <div class="hero-stats">
+    <div><span class="hs-n">80+</span><div class="hs-l">Projects Done</div></div>
+    <div><span class="hs-n">24h</span><div class="hs-l">Express Delivery</div></div>
+    <div><span class="hs-n">15+</span><div class="hs-l">Website Types</div></div>
+    <div><span class="hs-n">4.9★</span><div class="hs-l">Client Rating</div></div>
+  </div>
+  <div class="scroll-ind"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- CLIENT LOGOS -->
+<div class="logos-strip">
+  <div class="logos-label">Trusted by businesses across India</div>
+  <div class="logos-row">
+    <div class="logo-pill">Spice Garden</div>
+    <div class="logo-pill">Mehta Clinic</div>
+    <div class="logo-pill">KurtiKraft</div>
+    <div class="logo-pill">IronEdge Gym</div>
+    <div class="logo-pill">LearnHive</div>
+    <div class="logo-pill">DreamHomes</div>
+    <div class="logo-pill">FlowDesk</div>
+    <div class="logo-pill">AryanDev</div>
+  </div>
+</div>
+
+<!-- SERVICES ACCORDION -->
+<section class="svc-bg" id="services-section">
+  <div class="ct reveal">
+    <div class="sec-label c">What We Offer</div>
+    <h2 class="sec-title">Complete Digital Services<br><em>— Expertly Delivered</em></h2>
+    <p class="sec-sub">Click any category to explore every sub-service. 75+ services across 8 categories.</p>
+  </div>
+  <div class="svc-cats reveal">
+    <div class="svc-cat" id="c1"><div class="svc-hdr" onclick="toggleCat('c1')"><div class="svc-left"><span class="svc-ico">🌐</span><div><div class="svc-cat-title">Website Design & Development</div><div class="svc-cat-sub">Custom mobile-first websites that convert visitors into customers</div></div></div><span class="svc-count">10 Services</span><span class="svc-arrow">+</span></div><div class="svc-body"><div class="svc-body-inner"><p class="svc-intro">100% custom-designed, fast-loading websites built around your specific business goals. Every pixel intentional. Every interaction smooth.</p><div class="svc-grid"><div class="svc-item"><div class="svc-nm"><span>🎨</span>Custom UI/UX Design</div><div class="svc-desc">Unique designs from scratch — no templates. Tailored to your brand and audience.</div><span class="svc-tag">Design</span></div><div class="svc-item"><div class="svc-nm"><span>📱</span>Mobile-First Development</div><div class="svc-desc">Fully responsive across phones, tablets, desktops. Google ranks mobile-first sites higher.</div><span class="svc-tag">Dev</span></div><div class="svc-item"><div class="svc-nm"><span>⚡</span>Speed Optimization</div><div class="svc-desc">Sub-2-second load times via image compression, lazy loading, caching, and CDN.</div><span class="svc-tag">Performance</span></div><div class="svc-item"><div class="svc-nm"><span>🏢</span>Corporate / Business Site</div><div class="svc-desc">Multi-page professional sites for companies, agencies, and service providers.</div><span class="svc-tag">Business</span></div><div class="svc-item"><div class="svc-nm"><span>🏥</span>Clinic / Hospital Website</div><div class="svc-desc">Online appointment booking, doctor profiles, service pages, patient portal.</div><span class="svc-tag">Healthcare</span></div><div class="svc-item"><div class="svc-nm"><span>🍽️</span>Restaurant / Food Website</div><div class="svc-desc">Menu, table reservation, gallery, Zomato/Swiggy integration.</div><span class="svc-tag">F&B</span></div><div class="svc-item"><div class="svc-nm"><span>🏡</span>Real Estate Website</div><div class="svc-desc">Property listings, search filters, map view, EMI calculator, lead capture.</div><span class="svc-tag">Real Estate</span></div><div class="svc-item"><div class="svc-nm"><span>📚</span>Education / EdTech Portal</div><div class="svc-desc">Course listings, video lectures, quizzes, student progress tracking.</div><span class="svc-tag">EdTech</span></div><div class="svc-item"><div class="svc-nm"><span>🔧</span>CMS Integration</div><div class="svc-desc">Update your content without coding via WordPress or custom CMS.</div><span class="svc-tag">CMS</span></div><div class="svc-item"><div class="svc-nm"><span>🔒</span>SSL & Security Setup</div><div class="svc-desc">HTTPS, SSL certificates, malware protection, and security hardening.</div><span class="svc-tag">Security</span></div></div></div></div></div>
+    <div class="svc-cat" id="c2"><div class="svc-hdr" onclick="toggleCat('c2')"><div class="svc-left"><span class="svc-ico">🛒</span><div><div class="svc-cat-title">E-Commerce Store Development</div><div class="svc-cat-sub">Complete online stores with payments, inventory & order management</div></div></div><span class="svc-count">12 Services</span><span class="svc-arrow">+</span></div><div class="svc-body"><div class="svc-body-inner"><p class="svc-intro">Full-featured online stores designed to sell — from a 10-product boutique to a 10,000-product marketplace.</p><div class="svc-grid"><div class="svc-item"><div class="svc-nm"><span>🏪</span>Full E-Commerce Store</div><div class="svc-desc">Complete shop with product pages, cart, wishlist, and smooth checkout flow.</div><span class="svc-tag">Core</span></div><div class="svc-item"><div class="svc-nm"><span>💳</span>Payment Gateway</div><div class="svc-desc">Razorpay, PayU, UPI, cards, net banking, EMI — all integrated.</div><span class="svc-tag">Payments</span></div><div class="svc-item"><div class="svc-nm"><span>📦</span>Inventory Management</div><div class="svc-desc">Track stock, set alerts, manage variants (size, color).</div><span class="svc-tag">Operations</span></div><div class="svc-item"><div class="svc-nm"><span>🚚</span>Shipping Integration</div><div class="svc-desc">Shiprocket, Delhivery, Ekart with auto-tracking and notifications.</div><span class="svc-tag">Logistics</span></div><div class="svc-item"><div class="svc-nm"><span>📊</span>Admin Dashboard</div><div class="svc-desc">Manage orders, products, customers, revenue from one panel.</div><span class="svc-tag">Admin</span></div><div class="svc-item"><div class="svc-nm"><span>🤖</span>AI Product Recommendations</div><div class="svc-desc">"You may also like" engine — increases order value by up to 35%.</div><span class="svc-tag">AI</span></div><div class="svc-item"><div class="svc-nm"><span>⭐</span>Reviews & Ratings</div><div class="svc-desc">Customer reviews with photo upload, verified badges, moderation.</div><span class="svc-tag">Social Proof</span></div><div class="svc-item"><div class="svc-nm"><span>🎟️</span>Coupon & Discount Engine</div><div class="svc-desc">Promo codes, bulk discounts, flash sales, BOGO offers.</div><span class="svc-tag">Marketing</span></div><div class="svc-item"><div class="svc-nm"><span>📲</span>WhatsApp Order Alerts</div><div class="svc-desc">Auto-send order confirmed, shipped, delivered messages via WhatsApp.</div><span class="svc-tag">Automation</span></div><div class="svc-item"><div class="svc-nm"><span>🔍</span>Advanced Search & Filters</div><div class="svc-desc">Instant search with filters by price, category, rating, brand.</div><span class="svc-tag">UX</span></div><div class="svc-item"><div class="svc-nm"><span>📱</span>PWA Mobile App</div><div class="svc-desc">Your store works like a native app — no Play Store required.</div><span class="svc-tag">Mobile</span></div><div class="svc-item"><div class="svc-nm"><span>🌍</span>Multi-Language Store</div><div class="svc-desc">Hindi, English, Tamil, Telugu and more. Reach all of India.</div><span class="svc-tag">Regional</span></div></div></div></div></div>
+    <div class="svc-cat" id="c3"><div class="svc-hdr" onclick="toggleCat('c3')"><div class="svc-left"><span class="svc-ico">🤖</span><div><div class="svc-cat-title">AI Chatbot Integration</div><div class="svc-cat-sub">24/7 intelligent bots that handle queries, leads & bookings</div></div></div><span class="svc-count">9 Services</span><span class="svc-arrow">+</span></div><div class="svc-body"><div class="svc-body-inner"><p class="svc-intro">Trained on your specific business data — answers like a real team member, works 24/7, handles hundreds of conversations simultaneously.</p><div class="svc-grid"><div class="svc-item"><div class="svc-nm"><span>💬</span>Custom AI Chatbot</div><div class="svc-desc">Trained on your FAQs, services, pricing to answer queries accurately.</div><span class="svc-tag">Core</span></div><div class="svc-item"><div class="svc-nm"><span>📋</span>Lead Capture Bot</div><div class="svc-desc">Collects name, phone, email and sends instant WhatsApp alerts.</div><span class="svc-tag">Leads</span></div><div class="svc-item"><div class="svc-nm"><span>📅</span>Appointment Booking Bot</div><div class="svc-desc">Clients pick date & time in chat. Auto-confirms via WhatsApp.</div><span class="svc-tag">Booking</span></div><div class="svc-item"><div class="svc-nm"><span>🛒</span>E-Commerce Support Bot</div><div class="svc-desc">Tracks orders, handles returns, answers questions, upsells.</div><span class="svc-tag">E-Com</span></div><div class="svc-item"><div class="svc-nm"><span>🌐</span>Multilingual Bot</div><div class="svc-desc">Detects language and responds in Hindi, English, Tamil, Telugu +.</div><span class="svc-tag">Regional</span></div><div class="svc-item"><div class="svc-nm"><span>📊</span>Chatbot Analytics</div><div class="svc-desc">Conversations, leads generated, resolution rate, drop-off tracking.</div><span class="svc-tag">Analytics</span></div><div class="svc-item"><div class="svc-nm"><span>🔗</span>CRM Integration</div><div class="svc-desc">Push chat leads into Zoho, HubSpot, Google Sheets automatically.</div><span class="svc-tag">Integration</span></div><div class="svc-item"><div class="svc-nm"><span>🧠</span>Continuous AI Training</div><div class="svc-desc">Monthly updates to improve answers based on new data.</div><span class="svc-tag">Ongoing</span></div><div class="svc-item"><div class="svc-nm"><span>👤</span>Live Agent Handoff</div><div class="svc-desc">Smooth transfer to human agent when bot can't handle query.</div><span class="svc-tag">Support</span></div></div></div></div></div>
+    <div class="svc-cat" id="c4"><div class="svc-hdr" onclick="toggleCat('c4')"><div class="svc-left"><span class="svc-ico">📱</span><div><div class="svc-cat-title">WhatsApp Business Automation</div><div class="svc-cat-sub">Automate customer communication on India's #1 messaging platform</div></div></div><span class="svc-count">10 Services</span><span class="svc-arrow">+</span></div><div class="svc-body"><div class="svc-body-inner"><p class="svc-intro">500M+ active WhatsApp users in India. We turn it into your most powerful business automation tool.</p><div class="svc-grid"><div class="svc-item"><div class="svc-nm"><span>⚙️</span>WhatsApp Business API</div><div class="svc-desc">Official Meta-verified API with green tick badge eligibility.</div><span class="svc-tag">Setup</span></div><div class="svc-item"><div class="svc-nm"><span>🤖</span>AI WhatsApp Chatbot</div><div class="svc-desc">Smart bot handling queries, products, support on WhatsApp.</div><span class="svc-tag">AI</span></div><div class="svc-item"><div class="svc-nm"><span>📦</span>Order Status Automation</div><div class="svc-desc">Auto-send order confirmed, shipped, delivered messages.</div><span class="svc-tag">E-Com</span></div><div class="svc-item"><div class="svc-nm"><span>🔁</span>Lead Follow-Up Sequences</div><div class="svc-desc">Automated follow-ups Day 1, 3, 7 after enquiry. Never lose a lead.</div><span class="svc-tag">Sales</span></div><div class="svc-item"><div class="svc-nm"><span>📢</span>Broadcast Campaigns</div><div class="svc-desc">Send promos and offers to thousands of customers at once.</div><span class="svc-tag">Marketing</span></div><div class="svc-item"><div class="svc-nm"><span>📋</span>Product Catalog</div><div class="svc-desc">Showcase products/services with images and prices inside WhatsApp.</div><span class="svc-tag">Catalog</span></div><div class="svc-item"><div class="svc-nm"><span>📅</span>Appointment Reminders</div><div class="svc-desc">Auto-reminders 24h & 1h before. Reduce no-shows by 70%.</div><span class="svc-tag">Booking</span></div><div class="svc-item"><div class="svc-nm"><span>💰</span>Payment Link Automation</div><div class="svc-desc">Auto-send UPI/Razorpay links after order placement.</div><span class="svc-tag">Payments</span></div><div class="svc-item"><div class="svc-nm"><span>⭐</span>Review Request Automation</div><div class="svc-desc">Auto-request Google reviews after purchase. Build reputation on autopilot.</div><span class="svc-tag">Reviews</span></div><div class="svc-item"><div class="svc-nm"><span>📊</span>WhatsApp Analytics</div><div class="svc-desc">Track delivery, read rates, reply rates, campaign performance.</div><span class="svc-tag">Analytics</span></div></div></div></div></div>
+    <div class="svc-cat" id="c5"><div class="svc-hdr" onclick="toggleCat('c5')"><div class="svc-left"><span class="svc-ico">📊</span><div><div class="svc-cat-title">SEO & Google Ranking</div><div class="svc-cat-sub">Get found on Google and drive organic traffic that converts</div></div></div><span class="svc-count">11 Services</span><span class="svc-arrow">+</span></div><div class="svc-body"><div class="svc-body-inner"><p class="svc-intro">SEO keeps bringing customers for years. Our AI-powered team helps you dominate Google search results in your industry.</p><div class="svc-grid"><div class="svc-item"><div class="svc-nm"><span>🔍</span>SEO Audit & Strategy</div><div class="svc-desc">Full analysis with a clear 6-month growth roadmap.</div><span class="svc-tag">Strategy</span></div><div class="svc-item"><div class="svc-nm"><span>🗝️</span>Keyword Research</div><div class="svc-desc">AI-powered research finding high-volume, low-competition keywords.</div><span class="svc-tag">Research</span></div><div class="svc-item"><div class="svc-nm"><span>📄</span>On-Page SEO</div><div class="svc-desc">Optimize meta titles, descriptions, headers, images, content structure.</div><span class="svc-tag">On-Page</span></div><div class="svc-item"><div class="svc-nm"><span>⚙️</span>Technical SEO</div><div class="svc-desc">Fix crawl errors, improve Core Web Vitals, optimize site structure.</div><span class="svc-tag">Technical</span></div><div class="svc-item"><div class="svc-nm"><span>📍</span>Local SEO</div><div class="svc-desc">Rank for "near me" searches. GMB optimization, local citations.</div><span class="svc-tag">Local</span></div><div class="svc-item"><div class="svc-nm"><span>✍️</span>AI Content Writing</div><div class="svc-desc">SEO-optimized blogs, service pages, landing pages that rank and convert.</div><span class="svc-tag">Content</span></div><div class="svc-item"><div class="svc-nm"><span>🔗</span>Link Building</div><div class="svc-desc">High-quality backlinks from Indian news sites and directories.</div><span class="svc-tag">Off-Page</span></div><div class="svc-item"><div class="svc-nm"><span>🛒</span>E-Commerce SEO</div><div class="svc-desc">Optimize product pages and categories for Google Shopping.</div><span class="svc-tag">E-Com</span></div><div class="svc-item"><div class="svc-nm"><span>📊</span>Monthly SEO Reports</div><div class="svc-desc">Clear monthly reports: rankings, traffic growth, work done.</div><span class="svc-tag">Reporting</span></div><div class="svc-item"><div class="svc-nm"><span>🎯</span>Competitor Analysis</div><div class="svc-desc">See what competitors rank for and build a strategy to outrank them.</div><span class="svc-tag">Research</span></div><div class="svc-item"><div class="svc-nm"><span>🌐</span>Google My Business</div><div class="svc-desc">Complete GMB setup, weekly posts, photos, review management.</div><span class="svc-tag">Local</span></div></div></div></div></div>
+    <div class="svc-cat" id="c6"><div class="svc-hdr" onclick="toggleCat('c6')"><div class="svc-left"><span class="svc-ico">🎨</span><div><div class="svc-cat-title">Branding & Visual Identity</div><div class="svc-cat-sub">Build a brand people remember, trust, and choose over competition</div></div></div><span class="svc-count">8 Services</span><span class="svc-arrow">+</span></div><div class="svc-body"><div class="svc-body-inner"><p class="svc-intro">Your brand is more than a logo. We create cohesive identities that position you as the premium choice in your market.</p><div class="svc-grid"><div class="svc-item"><div class="svc-nm"><span>✏️</span>Logo Design</div><div class="svc-desc">Unique, memorable logos after deep research into your industry.</div><span class="svc-tag">Core</span></div><div class="svc-item"><div class="svc-nm"><span>🎨</span>Brand Identity Kit</div><div class="svc-desc">Colors, typography, logo variations, and usage guidelines.</div><span class="svc-tag">Identity</span></div><div class="svc-item"><div class="svc-nm"><span>📄</span>Business Stationery</div><div class="svc-desc">Business cards, letterheads, envelopes, and invoice templates.</div><span class="svc-tag">Print</span></div><div class="svc-item"><div class="svc-nm"><span>📱</span>Social Media Kit</div><div class="svc-desc">Profile pics, cover photos, post & story templates for all platforms.</div><span class="svc-tag">Social</span></div><div class="svc-item"><div class="svc-nm"><span>🖼️</span>AI Brand Images</div><div class="svc-desc">Custom AI-generated product images, hero banners, illustrations.</div><span class="svc-tag">AI</span></div><div class="svc-item"><div class="svc-nm"><span>📦</span>Packaging Design</div><div class="svc-desc">Product packaging, boxes, labels, bags that stand out on shelves.</div><span class="svc-tag">Product</span></div><div class="svc-item"><div class="svc-nm"><span>🔤</span>Brand Naming & Tagline</div><div class="svc-desc">Creative naming, tagline writing, brand voice development.</div><span class="svc-tag">Strategy</span></div><div class="svc-item"><div class="svc-nm"><span>🎥</span>Brand Video & Animation</div><div class="svc-desc">Logo animations, brand intro videos, explainer videos.</div><span class="svc-tag">Video</span></div></div></div></div></div>
+    <div class="svc-cat" id="c7"><div class="svc-hdr" onclick="toggleCat('c7')"><div class="svc-left"><span class="svc-ico">📈</span><div><div class="svc-cat-title">Digital Marketing & Paid Ads</div><div class="svc-cat-sub">Drive targeted traffic, leads, and sales through Google, Meta & more</div></div></div><span class="svc-count">8 Services</span><span class="svc-arrow">+</span></div><div class="svc-body"><div class="svc-body-inner"><p class="svc-intro">ROI-focused campaigns that bring real customers — not just clicks. Every rupee tracked, optimized, reported monthly.</p><div class="svc-grid"><div class="svc-item"><div class="svc-nm"><span>🎯</span>Google Search Ads</div><div class="svc-desc">Top of Google when people search your service. Pay per click only.</div><span class="svc-tag">PPC</span></div><div class="svc-item"><div class="svc-nm"><span>📘</span>Meta (FB/Instagram) Ads</div><div class="svc-desc">Targeted campaigns that generate leads and drive store visits.</div><span class="svc-tag">Social</span></div><div class="svc-item"><div class="svc-nm"><span>🛍️</span>Google Shopping Ads</div><div class="svc-desc">Products on Google search with images and prices.</div><span class="svc-tag">E-Com</span></div><div class="svc-item"><div class="svc-nm"><span>🔄</span>Retargeting Campaigns</div><div class="svc-desc">Bring back visitors who left. 3-5x higher conversions.</div><span class="svc-tag">Retargeting</span></div><div class="svc-item"><div class="svc-nm"><span>📧</span>Email Marketing</div><div class="svc-desc">Automated sequences, newsletters, drip campaigns.</div><span class="svc-tag">Email</span></div><div class="svc-item"><div class="svc-nm"><span>🎬</span>YouTube Ads</div><div class="svc-desc">Video campaigns for brand awareness at low cost per view.</div><span class="svc-tag">Video</span></div><div class="svc-item"><div class="svc-nm"><span>📊</span>Analytics & Reporting</div><div class="svc-desc">Monthly reports with CPL, ROAS, conversions, insights.</div><span class="svc-tag">Analytics</span></div><div class="svc-item"><div class="svc-nm"><span>🔥</span>Conversion Rate Optimization</div><div class="svc-desc">A/B test landing pages to squeeze more sales from spend.</div><span class="svc-tag">CRO</span></div></div></div></div></div>
+    <div class="svc-cat" id="c8"><div class="svc-hdr" onclick="toggleCat('c8')"><div class="svc-left"><span class="svc-ico">🔧</span><div><div class="svc-cat-title">Maintenance & Ongoing Support</div><div class="svc-cat-sub">Keep your website secure, fast, and always up-to-date</div></div></div><span class="svc-count">7 Services</span><span class="svc-arrow">+</span></div><div class="svc-body"><div class="svc-body-inner"><p class="svc-intro">We don't disappear after delivery. Our plans ensure your site is always fast, secure, and updated.</p><div class="svc-grid"><div class="svc-item"><div class="svc-nm"><span>🔒</span>Security Monitoring</div><div class="svc-desc">24/7 malware scanning, firewall protection, instant threat removal.</div><span class="svc-tag">Security</span></div><div class="svc-item"><div class="svc-nm"><span>💾</span>Daily Backups</div><div class="svc-desc">Automatic daily backups. Restore in minutes if anything goes wrong.</div><span class="svc-tag">Backup</span></div><div class="svc-item"><div class="svc-nm"><span>⚡</span>Performance Checks</div><div class="svc-desc">Monthly speed optimization to keep load times under 2 seconds.</div><span class="svc-tag">Performance</span></div><div class="svc-item"><div class="svc-nm"><span>📝</span>Content Updates</div><div class="svc-desc">Text changes, image uploads, new pages, product additions.</div><span class="svc-tag">Content</span></div><div class="svc-item"><div class="svc-nm"><span>🔄</span>Plugin & Core Updates</div><div class="svc-desc">All software updated safely, tested before applying.</div><span class="svc-tag">Updates</span></div><div class="svc-item"><div class="svc-nm"><span>📈</span>Monthly Analytics Report</div><div class="svc-desc">Traffic, behavior, conversions in plain language every month.</div><span class="svc-tag">Reporting</span></div><div class="svc-item"><div class="svc-nm"><span>🆘</span>Emergency Support</div><div class="svc-desc">Site down? We respond within 2 hours and fix on priority.</div><span class="svc-tag">Support</span></div></div></div></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CASE STUDIES -->
+<section class="cases-bg" id="case-studies">
+  <div class="ct reveal">
+    <div class="sec-label c" style="color:var(--gold-l);">Proven Results</div>
+    <h2 class="sec-title" style="color:var(--cream);">Real Client <em style="color:var(--gold-l);">Case Studies</em></h2>
+    <p class="sec-sub" style="margin:0 auto;color:rgba(234,220,180,.5);">Numbers don't lie. See what happened when these businesses invested in their digital presence.</p>
+  </div>
+  <div class="cases-grid reveal">
+    <div class="case-card"><div class="case-tag">Restaurant · Mumbai</div><span class="case-ico">🍛</span><h3>Spice Garden Restaurant</h3><p>Transformed from zero digital presence to a fully booked restaurant with online reservations, menu showcase, and delivery integrations.</p><div class="case-results"><div class="case-stat"><div class="case-stat-n">+340%</div><div class="case-stat-l">Reservations</div></div><div class="case-stat"><div class="case-stat-n">7 Days</div><div class="case-stat-l">Delivered</div></div></div></div>
+    <div class="case-card"><div class="case-tag">Healthcare · Pune</div><span class="case-ico">🏥</span><h3>Mehta Multi-Specialty Clinic</h3><p>Built appointment booking system with AI chatbot that now handles 80% of patient queries automatically, freeing the entire front desk.</p><div class="case-results"><div class="case-stat"><div class="case-stat-n">+220%</div><div class="case-stat-l">Online Bookings</div></div><div class="case-stat"><div class="case-stat-n">5 Days</div><div class="case-stat-l">Delivered</div></div></div></div>
+    <div class="case-card"><div class="case-tag">E-Commerce · Jaipur</div><span class="case-ico">👗</span><h3>KurtiKraft Fashion Store</h3><p>Moved from WhatsApp-only sales to a full e-commerce store with UPI payments and WhatsApp automation — 5x monthly revenue increase.</p><div class="case-results"><div class="case-stat"><div class="case-stat-n">+500%</div><div class="case-stat-l">Monthly Sales</div></div><div class="case-stat"><div class="case-stat-n">6 Days</div><div class="case-stat-l">Delivered</div></div></div></div>
+    <div class="case-card"><div class="case-tag">Fitness · Delhi</div><span class="case-ico">💪</span><h3>IronEdge Gym</h3><p>Complete gym website with online membership enrollment, class booking, and trainer profiles. Ranked Page 1 on Google within 3 weeks.</p><div class="case-results"><div class="case-stat"><div class="case-stat-n">+280%</div><div class="case-stat-l">New Members</div></div><div class="case-stat"><div class="case-stat-n">5 Days</div><div class="case-stat-l">Delivered</div></div></div></div>
+    <div class="case-card"><div class="case-tag">Education · Chennai</div><span class="case-ico">📚</span><h3>LearnHive EdTech Portal</h3><p>Full learning management system with video courses, quizzes, certificates, and 2,000+ student management. Raised ₹40L post-launch.</p><div class="case-results"><div class="case-stat"><div class="case-stat-n">2,000+</div><div class="case-stat-l">Students</div></div><div class="case-stat"><div class="case-stat-n">10 Days</div><div class="case-stat-l">Delivered</div></div></div></div>
+    <div class="case-card"><div class="case-tag">Real Estate · Bangalore</div><span class="case-ico">🏡</span><h3>DreamHomes Realty</h3><p>Property listing portal with advanced search, map view, EMI calculator, and WhatsApp lead capture. Generating 200+ qualified leads/month.</p><div class="case-results"><div class="case-stat"><div class="case-stat-n">200+</div><div class="case-stat-l">Leads/Month</div></div><div class="case-stat"><div class="case-stat-n">8 Days</div><div class="case-stat-l">Delivered</div></div></div></div>
+  </div>
+</section>
+
+<!-- AI FEATURES -->
+<section class="ai-bg" id="ai">
+  <div class="ct reveal">
+    <div class="sec-label c" style="color:var(--gold-l);">Intelligence Built In</div>
+    <h2 class="sec-title" style="color:var(--cream);">AI That Gives You<br><em style="color:var(--gold-l);">An Unfair Advantage</em></h2>
+    <p class="sec-sub" style="margin:0 auto;color:rgba(234,220,180,.45);">Every website we build can be supercharged with AI — tools your competitors simply don't have.</p>
+  </div>
+  <div class="ai-grid reveal">
+    <div class="ai-card"><span class="ai-ico">🤖</span><div class="ai-num">01</div><h3>AI Live Chatbot</h3><p>Trained on your business. Answers, captures leads, books 24/7.</p></div>
+    <div class="ai-card"><span class="ai-ico">🔍</span><div class="ai-num">02</div><h3>Smart AI Search</h3><p>Natural language so customers instantly find what they need.</p></div>
+    <div class="ai-card"><span class="ai-ico">✍️</span><div class="ai-num">03</div><h3>AI Content Writer</h3><p>SEO blogs & product copy in your brand voice. Auto-generated.</p></div>
+    <div class="ai-card"><span class="ai-ico">🎯</span><div class="ai-num">04</div><h3>Personalization Engine</h3><p>Show each visitor the most relevant products based on behavior.</p></div>
+    <div class="ai-card"><span class="ai-ico">📊</span><div class="ai-num">05</div><h3>AI Analytics</h3><p>Deep visitor insights and AI-powered improvement suggestions.</p></div>
+    <div class="ai-card"><span class="ai-ico">🌐</span><div class="ai-num">06</div><h3>Multi-Language AI</h3><p>Auto-translate into Hindi, Tamil, Telugu, and 10+ languages.</p></div>
+    <div class="ai-card"><span class="ai-ico">📱</span><div class="ai-num">07</div><h3>WhatsApp AI Bot</h3><p>Orders, queries, follow-ups on India's top platform — automated.</p></div>
+    <div class="ai-card"><span class="ai-ico">🖼️</span><div class="ai-num">08</div><h3>AI Image Generation</h3><p>Unlimited custom images and banners. No photographer needed.</p></div>
+  </div>
+</section>
+
+<!-- ROI CALCULATOR -->
+<section class="roi-bg" id="calculator">
+  <div class="reveal">
+    <div class="sec-label">See Your Returns</div>
+    <h2 class="sec-title">Calculate Your <em>ROI Before You Invest</em></h2>
+    <p class="sec-sub">See exactly what a professional website means for your business — in real numbers.</p>
+  </div>
+  <div class="roi-inner reveal">
+    <div class="roi-form">
+      <h4>Tell Us About Your Business</h4>
+      <div class="roi-field"><label>Business Type</label><select id="bizType" onchange="calcROI()"><option value="restaurant">Restaurant / Cafe</option><option value="clinic">Clinic / Hospital</option><option value="ecommerce">E-Commerce Store</option><option value="freelancer">Freelancer / Consultant</option><option value="realestate">Real Estate</option><option value="gym">Gym / Fitness</option><option value="education">Education / Coaching</option></select></div>
+      <div class="roi-field"><label>Monthly Visitors: <strong id="visitorsLabel">500</strong></label><input type="range" id="visitors" min="100" max="10000" step="100" value="500" oninput="calcROI();document.getElementById('visitorsLabel').textContent=parseInt(this.value).toLocaleString()"><div class="range-labels"><span>100</span><span>5,000</span><span>10,000</span></div></div>
+      <div class="roi-field"><label>Avg. Order / Service Value: <strong id="valueLabel">₹2,000</strong></label><input type="range" id="avgValue" min="500" max="50000" step="500" value="2000" oninput="calcROI();document.getElementById('valueLabel').textContent='₹'+parseInt(this.value).toLocaleString()"><div class="range-labels"><span>₹500</span><span>₹25,000</span><span>₹50,000</span></div></div>
+      <div class="roi-field"><label>Current Conversion Rate</label><select id="convRate" onchange="calcROI()"><option value="0.5">Very Low (0.5%)</option><option value="1" selected>Low (1%)</option><option value="2">Average (2%)</option><option value="3">Good (3%)</option></select></div>
+    </div>
+    <div class="roi-results">
+      <h4>Your Projected Results</h4>
+      <div class="roi-metric"><div class="roi-metric-label">Current Monthly Revenue</div><div class="roi-metric-value" id="currentRev">₹10,000</div><div class="roi-metric-sub">Based on your current conversion rate</div></div>
+      <div class="roi-metric"><div class="roi-metric-label">With KexCraft (+150% conversion boost)</div><div class="roi-metric-value" id="newRev">₹25,000</div><div class="roi-metric-sub">Realistic improvement from professional design & AI</div></div>
+      <div class="roi-metric"><div class="roi-metric-label">Extra Monthly Revenue</div><div class="roi-metric-value" id="extraRev" style="color:#7fc87f;">+₹15,000</div><div class="roi-metric-sub">Website pays for itself in less than a month</div></div>
+      <div class="roi-metric"><div class="roi-metric-label">First Year ROI</div><div class="roi-metric-value" id="yearRoi" style="color:var(--gold-s);">1,800%</div><div class="roi-metric-sub">Annual extra revenue vs one-time investment</div></div>
+      <a href="#contact" class="roi-cta-btn" onclick="setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),10)">Get This Result For Your Business →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="port-bg" id="portfolio">
+  <div class="ct reveal">
+    <div class="sec-label c">Live Demonstrations</div>
+    <h2 class="sec-title">See Every <em>Type We Build</em></h2>
+    <p class="sec-sub">Click any industry to see a fully designed live demo.</p>
+  </div>
+  <div class="port-tabs">
+    <button class="tab-btn active" onclick="showDemo('restaurant',this)">🍽️ Restaurant</button>
+    <button class="tab-btn" onclick="showDemo('clinic',this)">🏥 Clinic</button>
+    <button class="tab-btn" onclick="showDemo('ecom',this)">🛒 E-Commerce</button>
+    <button class="tab-btn" onclick="showDemo('portfolio',this)">👨‍💼 Portfolio</button>
+    <button class="tab-btn" onclick="showDemo('realestate',this)">🏡 Real Estate</button>
+    <button class="tab-btn" onclick="showDemo('gym',this)">💪 Gym</button>
+  </div>
+  <div class="demo-panel active" id="demo-restaurant"><div class="demo-wrap reveal"><div class="demo-bar-ui"><div><span class="ddot d1"></span><span class="ddot d2"></span><span class="ddot d3"></span></div><div class="demo-url">🔒 spicegarden.Kexcraftstudio.in — Restaurant</div></div><iframe class="demo-frame" srcdoc='<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:"Lato",sans-serif;background:#0a0600;color:#f5f0e8;}nav{display:flex;align-items:center;justify-content:space-between;padding:16px 44px;background:rgba(10,6,0,.92);border-bottom:1px solid rgba(212,163,60,.18);position:sticky;top:0;z-index:100;}.logo{font-family:"Playfair Display",serif;font-size:1.35rem;font-weight:900;color:#d4a33c;}nav ul{list-style:none;display:flex;gap:24px;}nav ul a{text-decoration:none;color:#c8b89a;font-size:.82rem;letter-spacing:.8px;text-transform:uppercase;}.cta{background:#d4a33c;color:#0a0600!important;padding:8px 18px;border-radius:3px;font-weight:700;}.hero{min-height:85vh;display:flex;align-items:center;padding:72px 44px;background:linear-gradient(135deg,#0a0600 55%,#1a0e00);position:relative;overflow:hidden;}.hero::after{content:"";position:absolute;right:0;top:0;bottom:0;width:40%;background:radial-gradient(ellipse at 70% 50%,rgba(212,163,60,.07),transparent 65%);}.tag{display:inline-block;border:1px solid rgba(212,163,60,.35);color:#d4a33c;font-size:.68rem;letter-spacing:2.5px;padding:5px 13px;margin-bottom:18px;text-transform:uppercase;}.hero h1{font-family:"Playfair Display",serif;font-size:4rem;font-weight:900;line-height:1.05;max-width:520px;margin-bottom:16px;}.hero p{color:#c8b89a;font-size:.95rem;line-height:1.7;max-width:400px;margin-bottom:32px;font-weight:300;}.btns{display:flex;gap:12px;}.b1{background:#d4a33c;color:#0a0600;padding:13px 26px;border-radius:3px;text-decoration:none;font-weight:700;font-size:.85rem;}.b2{border:1px solid rgba(212,163,60,.35);color:#d4a33c;padding:13px 26px;border-radius:3px;text-decoration:none;font-weight:700;font-size:.85rem;}.sec{padding:60px 44px;}.lbl{font-size:.68rem;font-weight:700;letter-spacing:2.5px;color:#d4a33c;text-transform:uppercase;margin-bottom:10px;}.ttl{font-family:"Playfair Display",serif;font-size:2.2rem;font-weight:700;margin-bottom:26px;}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}.card{background:#130e03;border:1px solid rgba(212,163,60,.1);border-radius:6px;overflow:hidden;}.img{height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,#2a1a00,#3d2800);}.bd{padding:16px;}.bd h4{font-family:"Playfair Display",serif;font-size:1rem;margin-bottom:5px;}.bd p{color:#9a8870;font-size:.8rem;line-height:1.55;margin-bottom:10px;}.pr{color:#d4a33c;font-weight:700;}.feats{display:grid;grid-template-columns:repeat(4,1fr);background:#100c02;padding:40px 44px;text-align:center;}.feat span{font-size:1.8rem;display:block;margin-bottom:10px;}.feat h4{font-size:.85rem;font-weight:700;margin-bottom:4px;}.feat p{color:#9a8870;font-size:.76rem;}</style></head><body><nav><div class="logo">🌶 Spice Garden</div><ul><li><a href="#">Menu</a></li><li><a href="#">About</a></li><li><a href="#">Gallery</a></li><li><a href="#" class="cta">Reserve Table</a></li></ul></nav><div class="hero"><div><div class="tag">Fine Dining · Since 1998</div><h1>Authentic Flavours of India</h1><p>Award-winning North Indian cuisine crafted with premium spices and modern presentation.</p><div class="btns"><a href="#" class="b1">Reserve a Table →</a><a href="#" class="b2">View Menu</a></div></div></div><div class="sec"><div class="lbl">Our Menu</div><div class="ttl">Signature Dishes</div><div class="grid"><div class="card"><div class="img">🍛</div><div class="bd"><h4>Butter Chicken Masala</h4><p>Slow-cooked in rich tomato-butter gravy with garlic naan.</p><div class="pr">₹380</div></div></div><div class="card"><div class="img">🫓</div><div class="bd"><h4>Dal Makhani</h4><p>Overnight-cooked black lentils — our most loved signature.</p><div class="pr">₹280</div></div></div><div class="card"><div class="img">🍖</div><div class="bd"><h4>Lamb Rogan Josh</h4><p>Kashmiri-style tender lamb with aromatic spices and saffron.</p><div class="pr">₹520</div></div></div></div></div><div class="feats"><div class="feat"><span>🕐</span><h4>Open Daily</h4><p>12 PM – 11 PM</p></div><div class="feat"><span>🚗</span><h4>Free Parking</h4><p>Valet available</p></div><div class="feat"><span>🎉</span><h4>Private Events</h4><p>Parties & catering</p></div><div class="feat"><span>📦</span><h4>Home Delivery</h4><p>Zomato & Swiggy</p></div></div></body></html>'></iframe></div></div>
+  <div class="demo-panel" id="demo-clinic"><div class="demo-wrap reveal"><div class="demo-bar-ui"><div><span class="ddot d1"></span><span class="ddot d2"></span><span class="ddot d3"></span></div><div class="demo-url">🔒 drsharma.Kexcraftstudio.in — Clinic</div></div><iframe class="demo-frame" srcdoc='<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:"Plus Jakarta Sans",sans-serif;background:#f8fafc;color:#1e293b;}nav{display:flex;align-items:center;justify-content:space-between;padding:14px 44px;background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.05);}.logo{font-size:1.2rem;font-weight:800;color:#0f172a;}.logo span{color:#0ea5e9;}nav ul{list-style:none;display:flex;gap:22px;}nav ul a{text-decoration:none;color:#64748b;font-size:.82rem;font-weight:600;}.cta{background:#0ea5e9;color:#fff!important;padding:8px 18px;border-radius:7px;}.hero{background:linear-gradient(135deg,#0c4a6e,#0284c7);padding:60px 44px;display:flex;gap:48px;align-items:center;}.ht h1{font-size:2.6rem;font-weight:800;color:#fff;line-height:1.1;margin-bottom:12px;}.ht p{color:#bae6fd;font-size:.9rem;line-height:1.7;margin-bottom:24px;}.bb{background:#fff;color:#0284c7;padding:12px 24px;border-radius:7px;text-decoration:none;font-weight:700;font-size:.88rem;display:inline-block;}.card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:24px;min-width:240px;backdrop-filter:blur(12px);}.card h4{color:#fff;font-size:.95rem;font-weight:700;margin-bottom:14px;}.slot{background:rgba(255,255,255,.15);border-radius:7px;padding:9px 12px;margin-bottom:9px;color:#e0f2fe;font-size:.82rem;}.slot.ok{background:rgba(16,185,129,.25);}.svcs{padding:52px 44px;}.svcs h2{font-size:1.9rem;font-weight:800;margin-bottom:28px;text-align:center;}.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}.sc{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:24px;transition:all .3s;text-align:center;}.sc:hover{box-shadow:0 12px 30px rgba(0,0,0,.09);transform:translateY(-3px);}.sc span{font-size:2rem;display:block;margin-bottom:12px;}.sc h4{font-weight:700;font-size:.9rem;margin-bottom:5px;}.sc p{color:#64748b;font-size:.78rem;line-height:1.55;}.stats{background:#0c4a6e;padding:36px 44px;display:grid;grid-template-columns:repeat(4,1fr);text-align:center;}.st{color:#fff;}.stn{font-size:1.9rem;font-weight:800;color:#38bdf8;display:block;}.stl{font-size:.75rem;color:#93c5fd;margin-top:3px;}</style></head><body><nav><div class="logo">Dr. <span>Sharma</span> Clinic</div><ul><li><a href="#">About</a></li><li><a href="#">Services</a></li><li><a href="#">Doctors</a></li><li><a href="#" class="cta">Book Appointment</a></li></ul></nav><div class="hero"><div class="ht"><h1>Your Health,<br>Our Priority</h1><p>Expert care with compassion. Book same-day appointments online.</p><a href="#" class="bb">📅 Book Now</a></div><div class="card"><h4>📅 Today&apos;s Slots</h4><div class="slot ok">10:30 AM — Dr. Sharma</div><div class="slot ok">11:00 AM — Dr. Priya</div><div class="slot">2:00 PM — Dr. Rajan</div><div class="slot ok">4:30 PM — Dr. Mehta</div></div></div><div class="svcs"><h2>Our Specialities</h2><div class="sg"><div class="sc"><span>🫀</span><h4>Cardiology</h4><p>Heart screenings, ECG and consultations.</p></div><div class="sc"><span>🦴</span><h4>Orthopedics</h4><p>Joint care and sports injury treatment.</p></div><div class="sc"><span>👶</span><h4>Pediatrics</h4><p>Child health and growth monitoring.</p></div><div class="sc"><span>🧠</span><h4>Neurology</h4><p>Migraine, epilepsy, neurological disorders.</p></div><div class="sc"><span>👁</span><h4>Ophthalmology</h4><p>Eye tests, cataract, LASIK.</p></div><div class="sc"><span>🦷</span><h4>Dental</h4><p>Cleanings, fillings, implants, braces.</p></div></div></div><div class="stats"><div class="st"><span class="stn">15,000+</span><div class="stl">Patients</div></div><div class="st"><span class="stn">25+</span><div class="stl">Doctors</div></div><div class="st"><span class="stn">12 Yrs</span><div class="stl">Experience</div></div><div class="st"><span class="stn">98%</span><div class="stl">Satisfaction</div></div></div></body></html>'></iframe></div></div>
+  <div class="demo-panel" id="demo-ecom"><div class="demo-wrap reveal"><div class="demo-bar-ui"><div><span class="ddot d1"></span><span class="ddot d2"></span><span class="ddot d3"></span></div><div class="demo-url">🔒 shopkart.Kexcraftstudio.in — E-Commerce</div></div><iframe class="demo-frame" srcdoc='<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:"Nunito Sans",sans-serif;background:#fff;color:#1a1a2e;}nav{display:flex;align-items:center;justify-content:space-between;padding:12px 36px;background:#fff;border-bottom:2px solid #f0f0f0;position:sticky;top:0;z-index:100;}.logo{font-family:"Nunito",sans-serif;font-size:1.35rem;font-weight:900;color:#ff4757;}.logo span{color:#1a1a2e;}nav ul{list-style:none;display:flex;gap:18px;}nav ul a{text-decoration:none;color:#666;font-size:.82rem;font-weight:700;}.strip{background:#1a1a2e;color:#fff;text-align:center;padding:11px;font-size:.8rem;font-weight:700;}.banner{background:linear-gradient(135deg,#ff4757,#ff6b81);padding:48px 36px;display:flex;align-items:center;justify-content:space-between;}.bt h1{font-family:"Nunito",sans-serif;font-size:2.8rem;font-weight:900;color:#fff;line-height:1.05;margin-bottom:10px;}.bt p{color:rgba(255,255,255,.8);margin-bottom:22px;font-size:.92rem;}.sb{background:#fff;color:#ff4757;padding:12px 26px;border-radius:9px;text-decoration:none;font-family:"Nunito",sans-serif;font-weight:800;font-size:.88rem;display:inline-block;}.bb2{background:rgba(255,255,255,.2);border-radius:14px;padding:20px 28px;text-align:center;color:#fff;}.bnn{font-family:"Nunito",sans-serif;font-size:2.8rem;font-weight:900;display:block;}.cats{padding:32px 36px;}.cats h2{font-family:"Nunito",sans-serif;font-size:1.4rem;font-weight:900;margin-bottom:18px;}.cr{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;}.cc{border-radius:12px;padding:20px 16px;text-align:center;}.cc:nth-child(1){background:#fff0f3;}.cc:nth-child(2){background:#f0f7ff;}.cc:nth-child(3){background:#f0fff4;}.cc:nth-child(4){background:#fffbf0;}.cc span{font-size:2.2rem;display:block;margin-bottom:8px;}.cc h4{font-family:"Nunito",sans-serif;font-weight:800;font-size:.85rem;}.prods{padding:0 36px 32px;}.prods h2{font-family:"Nunito",sans-serif;font-size:1.4rem;font-weight:900;margin-bottom:18px;}.pg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}.pc{border:1px solid #f0f0f0;border-radius:12px;overflow:hidden;}.pi{height:140px;display:flex;align-items:center;justify-content:center;font-size:2.8rem;}.pb{padding:12px;}.pb h4{font-family:"Nunito",sans-serif;font-weight:800;font-size:.83rem;margin-bottom:3px;}.pb p{color:#888;font-size:.73rem;margin-bottom:7px;}.pp{font-family:"Nunito",sans-serif;font-weight:900;color:#ff4757;font-size:.97rem;}</style></head><body><nav><div class="logo">Shop<span>Kart</span></div><ul><li><a href="#">Men</a></li><li><a href="#">Women</a></li><li><a href="#">Electronics</a></li><li><a href="#">Sale 🔥</a></li></ul></nav><div class="strip">🎉 FREE SHIPPING above ₹499 · Code KEXCRAFT20 for 20% OFF</div><div class="banner"><div class="bt"><h1>Mega Summer Sale 2025</h1><p>Up to 70% off on 10,000+ products. Limited time.</p><a href="#" class="sb">Shop Now →</a></div><div class="bb2"><span class="bnn">70%</span><span style="font-size:.82rem;opacity:.88;">Max Off</span></div></div><div class="cats"><h2>Categories</h2><div class="cr"><div class="cc"><span>👗</span><h4>Fashion</h4></div><div class="cc"><span>📱</span><h4>Electronics</h4></div><div class="cc"><span>🏠</span><h4>Home</h4></div><div class="cc"><span>💄</span><h4>Beauty</h4></div></div></div><div class="prods"><h2>🔥 Trending Now</h2><div class="pg"><div class="pc"><div class="pi" style="background:#fff0f3">👗</div><div class="pb"><h4>Summer Dress</h4><p>Women · S M L</p><div class="pp">₹699 <s style="color:#ccc;font-size:.73rem">₹1,999</s></div></div></div><div class="pc"><div class="pi" style="background:#f0f7ff">📱</div><div class="pb"><h4>Wireless Earbuds</h4><p>Electronics</p><div class="pp">₹1,299 <s style="color:#ccc;font-size:.73rem">₹3,499</s></div></div></div><div class="pc"><div class="pi" style="background:#f0fff4">👟</div><div class="pb"><h4>Running Shoes</h4><p>Men · 7-11</p><div class="pp">₹2,199 <s style="color:#ccc;font-size:.73rem">₹4,999</s></div></div></div><div class="pc"><div class="pi" style="background:#fffbf0">🎧</div><div class="pb"><h4>Headphones</h4><p>Electronics</p><div class="pp">₹1,899 <s style="color:#ccc;font-size:.73rem">₹4,200</s></div></div></div></div></div></body></html>'></iframe></div></div>
+  <div class="demo-panel" id="demo-portfolio"><div class="demo-wrap reveal"><div class="demo-bar-ui"><div><span class="ddot d1"></span><span class="ddot d2"></span><span class="ddot d3"></span></div><div class="demo-url">🔒 rahul.dev — Portfolio</div></div><iframe class="demo-frame" srcdoc='<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:"Manrope",sans-serif;background:#0e0e14;color:#e8e8f0;}nav{display:flex;align-items:center;justify-content:space-between;padding:16px 44px;background:rgba(14,14,20,.9);border-bottom:1px solid rgba(255,255,255,.05);position:sticky;top:0;}.logo{font-family:"Space Mono",monospace;font-size:.95rem;color:#7fee7f;}.logo span{color:#fff;}nav ul{list-style:none;display:flex;gap:24px;}nav ul a{text-decoration:none;color:#888;font-size:.78rem;font-weight:600;font-family:"Space Mono",monospace;}.hb{background:#7fee7f;color:#0e0e14!important;padding:7px 16px;border-radius:5px;font-weight:700!important;}.hero{padding:70px 44px;min-height:82vh;display:flex;align-items:center;position:relative;overflow:hidden;}.hero::before{content:"";position:absolute;top:10%;right:5%;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(127,238,127,.07),transparent 70%);}.tag{display:inline-flex;align-items:center;gap:7px;background:rgba(127,238,127,.08);border:1px solid rgba(127,238,127,.16);padding:6px 14px;border-radius:100px;font-family:"Space Mono",monospace;font-size:.7rem;color:#7fee7f;margin-bottom:22px;}.hero h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;line-height:1.05;letter-spacing:-1.8px;margin-bottom:16px;}.hero h1 span{color:#7fee7f;}.hero p{color:#888;font-size:.94rem;line-height:1.75;max-width:460px;margin-bottom:28px;font-weight:300;}.sr{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}.st{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:5px 12px;border-radius:5px;font-family:"Space Mono",monospace;font-size:.68rem;color:#aaa;}.pb{display:flex;gap:12px;}.bg{background:#7fee7f;color:#0e0e14;padding:12px 26px;border-radius:7px;text-decoration:none;font-weight:700;font-size:.85rem;}.bh{border:1px solid rgba(255,255,255,.12);color:#e8e8f0;padding:12px 26px;border-radius:7px;text-decoration:none;font-weight:600;font-size:.85rem;}.ws{padding:44px;background:#0a0a10;}.ws h2{font-size:1.6rem;font-weight:800;margin-bottom:24px;letter-spacing:-1px;}.wg{display:grid;grid-template-columns:1fr 1fr;gap:16px;}.wc{border-radius:10px;overflow:hidden;}.wi{height:160px;display:flex;align-items:center;justify-content:center;font-size:2.8rem;}.wc:nth-child(1) .wi{background:linear-gradient(135deg,#1a1a40,#2d2d70);}.wc:nth-child(2) .wi{background:linear-gradient(135deg,#1a3020,#2d5040);}.wc:nth-child(3) .wi{background:linear-gradient(135deg,#401a1a,#703030);}.wc:nth-child(4) .wi{background:linear-gradient(135deg,#2a1a40,#503070);}.wb{padding:14px;background:#141420;}.wb h4{font-weight:700;margin-bottom:4px;font-size:.87rem;}.wb p{color:#666;font-size:.76rem;}.wt{display:flex;gap:5px;margin-top:7px;}.w2{background:rgba(127,238,127,.08);color:#7fee7f;font-size:.62rem;font-weight:700;padding:2px 7px;border-radius:3px;}</style></head><body><nav><div class="logo">rahul<span>.dev</span></div><ul><li><a href="#">Work</a></li><li><a href="#">About</a></li><li><a href="#">Skills</a></li><li><a href="#" class="hb">Hire Me</a></li></ul></nav><div class="hero"><div><div class="tag">● Available for Work</div><h1>Full-Stack<br><span>Developer</span> &<br>UI Designer</h1><p>5+ years building fast, beautiful web apps. React, Node.js, and AI specialist.</p><div class="sr"><span class="st">React.js</span><span class="st">Node.js</span><span class="st">TypeScript</span><span class="st">Python</span><span class="st">AI/ML</span><span class="st">Figma</span></div><div class="pb"><a href="#" class="bg">View Work →</a><a href="#" class="bh">Download CV</a></div></div></div><div class="ws"><h2>Selected Work</h2><div class="wg"><div class="wc"><div class="wi">🛒</div><div class="wb"><h4>E-Commerce Platform</h4><p>Next.js + Stripe + AI</p><div class="wt"><span class="w2">REACT</span><span class="w2">AI</span></div></div></div><div class="wc"><div class="wi">📊</div><div class="wb"><h4>Analytics Dashboard</h4><p>D3.js visualization</p><div class="wt"><span class="w2">VUE</span><span class="w2">D3</span></div></div></div><div class="wc"><div class="wi">🤖</div><div class="wb"><h4>AI Chatbot SaaS</h4><p>GPT-4 customer support</p><div class="wt"><span class="w2">PYTHON</span><span class="w2">GPT-4</span></div></div></div><div class="wc"><div class="wi">📱</div><div class="wb"><h4>Banking App</h4><p>React Native fintech</p><div class="wt"><span class="w2">RN</span><span class="w2">FINTECH</span></div></div></div></div></div></body></html>'></iframe></div></div>
+  <div class="demo-panel" id="demo-realestate"><div class="demo-wrap reveal"><div class="demo-bar-ui"><div><span class="ddot d1"></span><span class="ddot d2"></span><span class="ddot d3"></span></div><div class="demo-url">🔒 dreamhomes.Kexcraftstudio.in</div></div><iframe class="demo-frame" srcdoc='<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:"Jost",sans-serif;background:#faf9f6;color:#1a1a18;}nav{display:flex;align-items:center;justify-content:space-between;padding:16px 44px;background:#fff;border-bottom:1px solid #ede9e3;position:sticky;top:0;z-index:100;}.logo{font-family:"Cormorant Garamond",serif;font-size:1.35rem;font-weight:700;color:#2c2820;}nav ul{list-style:none;display:flex;gap:24px;}nav ul a{text-decoration:none;color:#7a7060;font-size:.82rem;font-weight:500;}.cc{background:#2c2820;color:#fff!important;padding:8px 18px;border-radius:3px;}.hero{background:linear-gradient(to right,rgba(26,22,14,.88),rgba(26,22,14,.4)),url();background-color:#2c2820;min-height:78vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:52px 44px;}.hero h1{font-family:"Cormorant Garamond",serif;font-size:4rem;font-weight:700;color:#fff;line-height:1.05;margin-bottom:14px;}.hero p{color:rgba(255,255,255,.6);font-size:.95rem;font-weight:300;margin-bottom:32px;}.sb{background:#fff;border-radius:10px;padding:20px 26px;display:flex;gap:13px;align-items:flex-end;box-shadow:0 20px 56px rgba(0,0,0,.28);}.sf{display:flex;flex-direction:column;gap:5px;}.sf label{font-size:.67rem;font-weight:600;color:#7a7060;letter-spacing:.9px;text-transform:uppercase;}.sf select,.sf input{border:1px solid #ede9e3;border-radius:5px;padding:9px 12px;font-family:"Jost",sans-serif;font-size:.84rem;color:#1a1a18;background:#fff;outline:none;min-width:120px;}.sbtn{background:#2c2820;color:#fff;padding:10px 20px;border-radius:5px;border:none;font-family:"Jost",sans-serif;font-weight:600;font-size:.84rem;cursor:pointer;white-space:nowrap;}.listings{padding:52px 44px;}.listings h2{font-family:"Cormorant Garamond",serif;font-size:2.2rem;font-weight:700;margin-bottom:6px;}.sub{color:#7a7060;margin-bottom:28px;font-size:.88rem;}.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}.pc2{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.05);transition:all .3s;}.pc2:hover{transform:translateY(-4px);box-shadow:0 12px 38px rgba(0,0,0,.11);}.pi{height:185px;display:flex;align-items:center;justify-content:center;font-size:3.8rem;position:relative;}.pb2{position:absolute;top:13px;left:13px;background:#2c2820;color:#fff;font-size:.65rem;font-weight:600;letter-spacing:.8px;padding:3px 9px;border-radius:3px;}.bd{padding:18px;}.ploc{font-size:.76rem;color:#9a8a70;margin-bottom:5px;}.bd h4{font-family:"Cormorant Garamond",serif;font-size:1.1rem;font-weight:700;margin-bottom:7px;}.pp{font-size:1.15rem;font-weight:600;color:#2c2820;margin-bottom:11px;}.ps{display:flex;gap:13px;}.sp{font-size:.75rem;color:#9a8a70;}</style></head><body><nav><div class="logo">Dream Homes</div><ul><li><a href="#">Buy</a></li><li><a href="#">Rent</a></li><li><a href="#">New Projects</a></li><li><a href="#" class="cc">Contact</a></li></ul></nav><div class="hero"><h1>Find Your Dream Home</h1><p>India&apos;s most trusted property platform. 50,000+ verified listings.</p><div class="sb"><div class="sf"><label>Looking For</label><select><option>Buy</option><option>Rent</option></select></div><div class="sf"><label>Location</label><input type="text" placeholder="City or Area..."/></div><div class="sf"><label>Type</label><select><option>Apartment</option><option>Villa</option></select></div><div class="sf"><label>Budget</label><select><option>₹20L–₹50L</option><option>₹50L–₹1Cr</option></select></div><button class="sbtn">Search →</button></div></div><div class="listings"><h2>Featured Properties</h2><p class="sub">Handpicked premium listings</p><div class="pg"><div class="pc2"><div class="pi" style="background:linear-gradient(135deg,#ddd5c0,#c4b89a)"><div class="pb2">FOR SALE</div>🏢</div><div class="bd"><div class="ploc">📍 Bandra West, Mumbai</div><h4>Luxe 3BHK Apartment</h4><div class="pp">₹2.8 Cr</div><div class="ps"><span class="sp">🛏 3 BHK</span><span class="sp">🚿 2 Bath</span><span class="sp">📐 1,450 sqft</span></div></div></div><div class="pc2"><div class="pi" style="background:linear-gradient(135deg,#c5d5c0,#a4b89a)"><div class="pb2">NEW</div>🏡</div><div class="bd"><div class="ploc">📍 Whitefield, Bangalore</div><h4>Independent Villa</h4><div class="pp">₹1.6 Cr</div><div class="ps"><span class="sp">🛏 4 BHK</span><span class="sp">🚿 3 Bath</span><span class="sp">📐 2,200 sqft</span></div></div></div><div class="pc2"><div class="pi" style="background:linear-gradient(135deg,#c0c5d5,#9aa0b8)"><div class="pb2">READY</div>🏗</div><div class="bd"><div class="ploc">📍 Gurgaon, Delhi NCR</div><h4>Premium 2BHK</h4><div class="pp">₹95 L</div><div class="ps"><span class="sp">🛏 2 BHK</span><span class="sp">🚿 2 Bath</span><span class="sp">📐 980 sqft</span></div></div></div></div></div></body></html>'></iframe></div></div>
+  <div class="demo-panel" id="demo-gym"><div class="demo-wrap reveal"><div class="demo-bar-ui"><div><span class="ddot d1"></span><span class="ddot d2"></span><span class="ddot d3"></span></div><div class="demo-url">🔒 ironedge.Kexcraftstudio.in — Gym</div></div><iframe class="demo-frame" srcdoc='<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:"Barlow",sans-serif;background:#060606;color:#f0f0f0;}nav{display:flex;align-items:center;justify-content:space-between;padding:14px 44px;background:rgba(6,6,6,.95);border-bottom:1px solid rgba(255,200,0,.1);position:sticky;top:0;z-index:100;}.logo{font-family:"Bebas Neue",sans-serif;font-size:1.7rem;letter-spacing:2px;color:#ffc800;}.logo span{color:#fff;}nav ul{list-style:none;display:flex;gap:24px;}nav ul a{text-decoration:none;color:#888;font-size:.82rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;}.jb{background:#ffc800;color:#000!important;padding:8px 20px;border-radius:3px;font-weight:700!important;}.hero{min-height:86vh;background:linear-gradient(to bottom,rgba(6,6,6,.65),rgba(6,6,6,.94)),linear-gradient(135deg,#1a0a00,#0a0a0a);display:flex;align-items:center;padding:72px 44px;position:relative;overflow:hidden;}.hero::before{content:"";position:absolute;top:0;right:0;bottom:0;width:50%;background:radial-gradient(ellipse at 70% 50%,rgba(255,200,0,.07),transparent 60%);}.ht{display:inline-block;background:#ffc800;color:#000;font-family:"Bebas Neue",sans-serif;font-size:.85rem;letter-spacing:2.5px;padding:4px 14px;margin-bottom:18px;}.hero h1{font-family:"Bebas Neue",sans-serif;font-size:5.5rem;line-height:.95;letter-spacing:2px;margin-bottom:16px;}.hero h1 span{color:#ffc800;}.hero p{color:#888;font-size:.96rem;line-height:1.7;max-width:420px;margin-bottom:28px;}.gb{display:flex;gap:12px;}.b1{background:#ffc800;color:#000;padding:13px 28px;border-radius:3px;text-decoration:none;font-weight:700;font-size:.87rem;}.b2{border:1px solid #ffc800;color:#ffc800;padding:13px 28px;border-radius:3px;text-decoration:none;font-weight:700;font-size:.87rem;}.progs{padding:56px 44px;}.progs h2{font-family:"Bebas Neue",sans-serif;font-size:2.8rem;letter-spacing:2px;margin-bottom:24px;}.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#111;border-radius:8px;overflow:hidden;}.pc{background:#0d0d0d;padding:26px;transition:background .3s;}.pc:hover{background:#141414;}.pi{font-size:2rem;margin-bottom:13px;display:block;}.pc h4{font-family:"Bebas Neue",sans-serif;font-size:1.25rem;letter-spacing:1px;margin-bottom:6px;color:#ffc800;}.pc p{color:#666;font-size:.82rem;line-height:1.6;}.stats{background:#ffc800;padding:32px 44px;display:grid;grid-template-columns:repeat(4,1fr);text-align:center;}.sn{font-family:"Bebas Neue",sans-serif;font-size:2.6rem;letter-spacing:2px;color:#000;display:block;}.sl{font-size:.78rem;font-weight:600;color:rgba(0,0,0,.55);text-transform:uppercase;}</style></head><body><nav><div class="logo">Iron<span>Edge</span></div><ul><li><a href="#">Programs</a></li><li><a href="#">Coaches</a></li><li><a href="#">Pricing</a></li><li><a href="#" class="jb">Join Now</a></li></ul></nav><div class="hero"><div><div class="ht">No Excuses. Only Results.</div><h1>PUSH YOUR <span>LIMITS</span></h1><p>State-of-the-art gym with expert coaches, 50+ equipment, and personalized plans.</p><div class="gb"><a href="#" class="b1">Start Free Trial →</a><a href="#" class="b2">View Programs</a></div></div></div><div class="progs"><h2>Our Programs</h2><div class="pg"><div class="pc"><span class="pi">🏋️</span><h4>Strength Training</h4><p>Progressive overload plans for all levels.</p></div><div class="pc"><span class="pi">🥊</span><h4>Boxing & MMA</h4><p>Fight, burn calories, build discipline.</p></div><div class="pc"><span class="pi">🧘</span><h4>Yoga & Wellness</h4><p>Recovery, flexibility, mental clarity.</p></div><div class="pc"><span class="pi">🏃</span><h4>HIIT Cardio</h4><p>Maximize fat burn in 45 minutes.</p></div><div class="pc"><span class="pi">🚴</span><h4>Spin Class</h4><p>High-energy cycling, 600 cal/session.</p></div><div class="pc"><span class="pi">🥗</span><h4>Nutrition Plans</h4><p>Custom diet by certified nutritionists.</p></div></div></div><div class="stats"><div><span class="sn">2,500+</span><span class="sl">Members</span></div><div><span class="sn">15+</span><span class="sl">Coaches</span></div><div><span class="sn">50+</span><span class="sl">Equipment</span></div><div><span class="sn">6AM–11PM</span><span class="sl">Daily</span></div></div></body></html>'></iframe></div></div>
+</section>
+
+<!-- TEAM -->
+<section class="team-bg" id="team">
+  <div class="ct reveal">
+    <div class="sec-label c">The People Behind the Magic</div>
+    <h2 class="sec-title">Meet Our <em>Expert Team</em></h2>
+    <p class="sec-sub">Passionate designers, developers, and strategists — all under one roof, all focused on your growth.</p>
+  </div>
+  <div class="team-grid reveal">
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,var(--cream2),var(--parchment));">👨‍💻</div><div class="team-body"><div class="team-name">Arjun Mehta</div><div class="team-role">Founder & Lead Developer</div><div class="team-bio">6+ years building full-stack web apps and AI integrations. IIT Bombay alumnus. Led 80+ successful projects.</div><div class="team-socials"><a href="#" class="ts">💼</a><a href="#" class="ts">🐦</a><a href="#" class="ts">📷</a></div></div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#e8d5c0,#d4bfa0);">👩‍🎨</div><div class="team-body"><div class="team-name">Priya Sharma</div><div class="team-role">Creative Director & UI Designer</div><div class="team-bio">Award-winning designer, 5 years crafting luxury brand identities and conversion-focused interfaces.</div><div class="team-socials"><a href="#" class="ts">💼</a><a href="#" class="ts">📷</a><a href="#" class="ts">🎨</a></div></div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#c8d8e8,#a8c0d8);">👨‍📊</div><div class="team-body"><div class="team-name">Rohit Verma</div><div class="team-role">SEO & Digital Marketing Head</div><div class="team-bio">Google-certified with 200+ businesses ranked on Page 1. ₹10Cr+ in ad spend managed successfully.</div><div class="team-socials"><a href="#" class="ts">💼</a><a href="#" class="ts">🐦</a></div></div></div>
+    <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#d0e8d0,#b0d0b0);">👩‍💼</div><div class="team-body"><div class="team-name">Sneha Patel</div><div class="team-role">Client Success Manager</div><div class="team-bio">Your direct point of contact. Ensures every project is delivered on time, on budget, and beyond expectations.</div><div class="team-socials"><a href="#" class="ts">💼</a><a href="#" class="ts">📷</a></div></div></div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="awards-bg" id="awards">
+  <div class="ct reveal">
+    <div class="sec-label c" style="color:var(--gold-l);">Recognition & Trust</div>
+    <h2 class="sec-title" style="color:var(--cream);">Awards & <em style="color:var(--gold-l);">Guarantees</em></h2>
+  </div>
+  <div class="awards-grid reveal">
+    <div class="award-card"><span class="award-ico">🏆</span><div class="award-title">Top Web Agency India</div><div class="award-sub">Clutch.co · 2025</div></div>
+    <div class="award-card"><span class="award-ico">⭐</span><div class="award-title">5-Star Rated</div><div class="award-sub">Google Reviews · 4.9/5</div></div>
+    <div class="award-card"><span class="award-ico">🤝</span><div class="award-title">Google Partner</div><div class="award-sub">Certified Ads Partner</div></div>
+    <div class="award-card"><span class="award-ico">🛡️</span><div class="award-title">ISO 9001 Certified</div><div class="award-sub">Quality Management</div></div>
+    <div class="award-card"><span class="award-ico">🌟</span><div class="award-title">Featured in YourStory</div><div class="award-sub">India's Top Startups</div></div>
+  </div>
+  <div class="guarantee-row reveal">
+    <div class="guar"><span class="guar-ico">💰</span><div><div class="guar-title">30-Day Money Back</div><div class="guar-sub">Not satisfied? Full refund, no questions.</div></div></div>
+    <div class="guar"><span class="guar-ico">📅</span><div><div class="guar-title">On-Time Delivery</div><div class="guar-sub">We honour every deadline, guaranteed.</div></div></div>
+    <div class="guar"><span class="guar-ico">🔄</span><div><div class="guar-title">Unlimited Revisions</div><div class="guar-sub">Until you're 100% happy. Period.</div></div></div>
+    <div class="guar"><span class="guar-ico">🔒</span><div><div class="guar-title">Secure Payment</div><div class="guar-sub">UPI, Bank Transfer, Razorpay.</div></div></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="proc-bg" id="process">
+  <div class="ct reveal">
+    <div class="sec-label c">How We Work</div>
+    <h2 class="sec-title">Zero to Live in <em>7 Days</em></h2>
+  </div>
+  <div class="proc-row reveal">
+    <div class="proc-step"><div class="proc-ico">📞</div><h4>Free Call</h4><p>30-min discovery call. Understand your goals, no obligation whatsoever.</p></div>
+    <div class="proc-step"><div class="proc-ico">📋</div><h4>Proposal</h4><p>Detailed plan with fixed price and timeline within 24 hours.</p></div>
+    <div class="proc-step"><div class="proc-ico">🎨</div><h4>Design OK</h4><p>Approve the design before one line of code is written.</p></div>
+    <div class="proc-step"><div class="proc-ico">⚙️</div><h4>Build & Test</h4><p>Development, AI integrations, rigorous testing on all devices.</p></div>
+    <div class="proc-step"><div class="proc-ico">🚀</div><h4>Launch!</h4><p>Go live with domain, hosting, and 30-day free support included.</p></div>
+  </div>
+</section>
+
+<!-- INSTAGRAM FEED -->
+<section class="ig-bg" id="instagram">
+  <div class="ig-header reveal">
+    <div class="ig-handle">
+      <div class="ig-av">📸</div>
+      <div>
+        <div class="ig-name">@Kexcraftstudio</div>
+        <div class="ig-sub">8,400 followers · Latest work & behind the scenes</div>
+      </div>
+    </div>
+    <a href="#" class="ig-follow">Follow Us</a>
+  </div>
+  <div class="ig-grid reveal">
+    <div class="ig-post"><div class="ig-post-inner">🌐</div><div class="ig-post-overlay"><span>❤️ 342</span><span>💬 28</span></div></div>
+    <div class="ig-post"><div class="ig-post-inner">🤖</div><div class="ig-post-overlay"><span>❤️ 518</span><span>💬 44</span></div></div>
+    <div class="ig-post"><div class="ig-post-inner">🎨</div><div class="ig-post-overlay"><span>❤️ 291</span><span>💬 19</span></div></div>
+    <div class="ig-post"><div class="ig-post-inner">📱</div><div class="ig-post-overlay"><span>❤️ 406</span><span>💬 33</span></div></div>
+    <div class="ig-post"><div class="ig-post-inner">💻</div><div class="ig-post-overlay"><span>❤️ 683</span><span>💬 57</span></div></div>
+    <div class="ig-post"><div class="ig-post-inner">🏆</div><div class="ig-post-overlay"><span>❤️ 924</span><span>💬 82</span></div></div>
+  </div>
+</section>
+
+<!-- BLOG SECTION (homepage preview) -->
+<section class="blog-bg" id="blog-preview">
+  <div class="ct reveal">
+    <div class="sec-label c">Knowledge Hub</div>
+    <h2 class="sec-title">Latest from Our <em>Blog</em></h2>
+    <p class="sec-sub">Practical tips, case studies, and digital growth strategies for Indian businesses.</p>
+  </div>
+  <div class="blog-grid reveal">
+    <div class="blog-card" onclick="showPage('blog')">
+      <div class="blog-img" style="background:linear-gradient(135deg,var(--mocha),var(--bark));">📊<div class="blog-cat">SEO</div></div>
+      <div class="blog-body">
+        <div class="blog-meta"><span class="blog-date">March 10, 2025</span><span class="blog-read">5 min read</span></div>
+        <div class="blog-title">How to Rank Your Local Business on Google in 30 Days</div>
+        <div class="blog-excerpt">A step-by-step guide to Local SEO for Indian businesses — from Google My Business setup to getting your first Page 1 ranking.</div>
+        <a href="#" class="blog-link" onclick="showPage('blog');return false;">Read Article <span>→</span></a>
+      </div>
+    </div>
+    <div class="blog-card" onclick="showPage('blog')">
+      <div class="blog-img" style="background:linear-gradient(135deg,#0c2a3a,#1a4a5a);">🤖<div class="blog-cat">AI</div></div>
+      <div class="blog-body">
+        <div class="blog-meta"><span class="blog-date">March 5, 2025</span><span class="blog-read">7 min read</span></div>
+        <div class="blog-title">WhatsApp Automation: How to Generate 100 Leads/Month on Autopilot</div>
+        <div class="blog-excerpt">The exact WhatsApp automation setup we use for our clients that generates consistent leads without any manual effort.</div>
+        <a href="#" class="blog-link" onclick="showPage('blog');return false;">Read Article <span>→</span></a>
+      </div>
+    </div>
+    <div class="blog-card" onclick="showPage('blog')">
+      <div class="blog-img" style="background:linear-gradient(135deg,#2a1a00,#4a3010);">💰<div class="blog-cat">Business</div></div>
+      <div class="blog-body">
+        <div class="blog-meta"><span class="blog-date">Feb 28, 2025</span><span class="blog-read">4 min read</span></div>
+        <div class="blog-title">₹10,000 vs ₹1,00,000 Website: What's the Real Difference?</div>
+        <div class="blog-excerpt">An honest breakdown of what you get at different price points and why investing in quality pays off within the first month.</div>
+        <a href="#" class="blog-link" onclick="showPage('blog');return false;">Read Article <span>→</span></a>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:44px;" class="reveal">
+    <button onclick="showPage('blog')" class="btn-o" style="display:inline-block;cursor:pointer;border:none;font-family:var(--font);">View All Articles →</button>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-bg" id="reviews">
+  <div class="ct reveal">
+    <div class="sec-label c">Client Stories</div>
+    <h2 class="sec-title">Words From Those <em>We've Served</em></h2>
+  </div>
+  <div class="testi-grid reveal">
+    <div class="tc"><div class="tc-stars">★★★★★</div><div class="tc-q">"</div><p class="tc-text">KexCraft transformed our restaurant. We now get 50+ table reservations weekly through our new website. Extraordinary work!</p><div class="tc-author"><div class="tc-av">RK</div><div><div class="tc-name">Rajesh Kumar</div><div class="tc-role">Owner, Spice Garden · Mumbai</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><div class="tc-q">"</div><p class="tc-text">The AI chatbot handles 80% of appointment queries automatically. Best investment for my clinic this entire year!</p><div class="tc-author"><div class="tc-av">DS</div><div><div class="tc-name">Dr. Sunita Mehta</div><div class="tc-role">Director, Mehta Clinic · Pune</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><div class="tc-q">"</div><p class="tc-text">Store live in 6 days. First order on Day 1. WhatsApp automation sends updates automatically — customers love it!</p><div class="tc-author"><div class="tc-av">PA</div><div><div class="tc-name">Pooja Agarwal</div><div class="tc-role">Founder, KurtiKraft · Jaipur</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><div class="tc-q">"</div><p class="tc-text">Got 3 new freelance clients within a week of my portfolio launch. KexCraft's attention to detail is extraordinary.</p><div class="tc-author"><div class="tc-av">AS</div><div><div class="tc-name">Aryan Singh</div><div class="tc-role">Freelance Developer · Bangalore</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><div class="tc-q">"</div><p class="tc-text">Gym website with online membership booking in 5 days. Google ranking improved within 3 weeks. Exceptional team!</p><div class="tc-author"><div class="tc-av">VT</div><div><div class="tc-name">Vikram Thakur</div><div class="tc-role">Owner, IronEdge Gym · Delhi</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><div class="tc-q">"</div><p class="tc-text">Education portal handles 2,000+ students with video lessons. Looks like a ₹10L product delivered for a fraction.</p><div class="tc-author"><div class="tc-av">NP</div><div><div class="tc-name">Neha Pandey</div><div class="tc-role">Co-Founder, LearnHive · Chennai</div></div></div></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-bg" id="faq">
+  <div class="ct reveal"><div class="sec-label c">Questions</div><h2 class="sec-title">Frequently <em>Asked</em></h2></div>
+  <div class="faq-wrap reveal">
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does it take to deliver a website?<span class="faq-icon">+</span></div><div class="faq-a"><p>Landing pages in 24 hours. 5-page business site in 3–5 days. E-commerce stores in 7–10 days. We give a firm timeline upfront and always honour it.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do I need to provide content or photos?<span class="faq-icon">+</span></div><div class="faq-a"><p>Not at all. Our AI content writer creates all website copy in your brand's voice, and we source professional photography at no extra cost.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Will I be able to update the website myself?<span class="faq-icon">+</span></div><div class="faq-a"><p>Yes. We integrate a simple CMS so you can update text, images, and products without any technical knowledge. Training walkthrough video included.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is there a money-back guarantee?<span class="faq-icon">+</span></div><div class="faq-a"><p>Absolutely. If you are not satisfied with the final delivery, we offer a full 30-day money-back guarantee — no questions asked. We are that confident.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do you offer installment payments?<span class="faq-icon">+</span></div><div class="faq-a"><p>Yes. For projects above ₹15,000 we accept 50% advance and 50% on delivery. Larger projects can be split into three payments. UPI, bank transfer, Razorpay.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What happens after delivery?<span class="faq-icon">+</span></div><div class="faq-a"><p>Every package includes free post-delivery support (30 days to 6 months). Ongoing monthly maintenance from ₹1,499/month covering updates, security, and backups.</p></div></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="price-bg" id="pricing">
+  <div class="ct reveal"><div class="sec-label c">Investment</div><h2 class="sec-title">Transparent, <em>Fixed Pricing</em></h2><p class="sec-sub">No surprises. No hidden fees. Know exactly what you pay upfront.</p></div>
+  <div class="price-grid reveal">
+    <div class="pc"><div class="pc-plan">Starter</div><div class="pc-price"><sup>₹</sup>9,999</div><div class="pc-note">Small businesses & local shops</div><ul class="pc-feat"><li>5-page custom website</li><li>Mobile responsive</li><li>Contact form & Maps</li><li>Basic SEO setup</li><li>WhatsApp button</li><li>30-day support</li><li class="no-f">AI chatbot</li><li class="no-f">E-commerce features</li></ul><a href="#contact" class="pc-btn" onclick="setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),10)">Get Started</a></div>
+    <div class="pc hot"><div class="pc-plan">Growth</div><div class="pc-price"><sup>₹</sup>24,999</div><div class="pc-note">Growing brands & startups</div><ul class="pc-feat"><li>15-page custom website</li><li>AI Chatbot included</li><li>WhatsApp automation</li><li>Advanced SEO + Blog</li><li>Analytics dashboard</li><li>Logo & branding</li><li>3 months support</li><li>Speed optimization</li></ul><a href="#contact" class="pc-btn hb" onclick="setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),10)">Begin Now →</a></div>
+    <div class="pc"><div class="pc-plan">Enterprise</div><div class="pc-price"><sup>₹</sup>49,999</div><div class="pc-note">Established businesses</div><ul class="pc-feat"><li>Full custom / E-commerce</li><li>All AI integrations</li><li>Payment gateway</li><li>Email marketing setup</li><li>Full branding package</li><li>Google/Meta Ads setup</li><li>6 months priority support</li><li>Monthly reports</li></ul><a href="#contact" class="pc-btn" onclick="setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),10)">Enquire Now</a></div>
+  </div>
+  <div style="text-align:center;margin-top:28px;"><p style="color:var(--text3);font-size:.86rem;">Need something custom? <a href="#contact" style="color:var(--gold);text-decoration:none;font-weight:600;" onclick="setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),10)">Let's talk →</a></p></div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-bg" id="contact">
+  <div class="contact-inner reveal">
+    <div class="contact-info">
+      <div class="sec-label">Begin Your Journey</div>
+      <h3>Let's Build Something<br><em style="font-style:italic;color:var(--gold);">Extraordinary</em> Together</h3>
+      <p>Tell us about your project. We respond within 2 hours and send a detailed proposal with exact pricing within 24 hours.</p>
+      <div class="c-channels">
+        <a href="https://wa.me/91XXXXXXXXXX" class="c-ch"><span class="c-ch-ico">💬</span><div><div class="c-ch-title">WhatsApp Us</div><div class="c-ch-sub">+91 XXXXX XXXXX · Reply in minutes</div></div></a>
+        <a href="mailto:hello@Kexcraftstudio.in" class="c-ch"><span class="c-ch-ico">✉️</span><div><div class="c-ch-title">Email Us</div><div class="c-ch-sub">hello@Kexcraftstudio.in</div></div></a>
+        <a href="tel:+91XXXXXXXXXX" class="c-ch"><span class="c-ch-ico">📞</span><div><div class="c-ch-title">Call Us</div><div class="c-ch-sub">Mon–Sat, 10 AM – 7 PM IST</div></div></a>
+        <a href="#" class="c-ch"><span class="c-ch-ico">📷</span><div><div class="c-ch-title">Instagram</div><div class="c-ch-sub">@Kexcraftstudio</div></div></a>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h4>Send Us a Message</h4>
+      <div class="form-row">
+        <div class="fg"><label>Your Name</label><input type="text" placeholder="Rahul Sharma"></div>
+        <div class="fg"><label>Phone / WhatsApp</label><input type="tel" placeholder="+91 98765 43210"></div>
+      </div>
+      <div class="fg"><label>Email</label><input type="email" placeholder="rahul@yourbusiness.com"></div>
+      <div class="fg"><label>Service Needed</label><select><option>Website Design & Development</option><option>E-Commerce Store</option><option>AI Chatbot</option><option>WhatsApp Automation</option><option>SEO Services</option><option>Branding & Logo</option><option>Digital Marketing</option><option>Monthly Maintenance</option><option>Full Digital Package</option><option>Something Custom</option></select></div>
+      <div class="fg"><label>Budget Range</label><select><option>Under ₹10,000</option><option>₹10,000 – ₹25,000</option><option>₹25,000 – ₹50,000</option><option>₹50,000 – ₹1,00,000</option><option>Above ₹1,00,000</option></select></div>
+      <div class="fg"><label>Tell Us About Your Project</label><textarea placeholder="Describe your business, requirements, and any specific ideas..."></textarea></div>
+      <button class="form-submit" onclick="submitForm(this)">Send Message & Get Free Quote →</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-strip reveal">
+  <h2>Ready to Elevate Your<br><em>Digital Presence?</em></h2>
+  <p>Join 80+ businesses that trusted KexCraft Studio. Free consultation. 30-day money-back. No risk.</p>
+  <div class="hero-btns">
+    <a href="https://wa.me/91XXXXXXXXXX" class="btn-g">💬 WhatsApp Now — It's Free</a>
+    <a href="#pricing" class="btn-o" style="color:var(--cream2);border-color:rgba(234,220,180,.18);" onclick="setTimeout(()=>document.getElementById('pricing').scrollIntoView({behavior:'smooth'}),10)">View All Plans</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><a href="#" class="logo" onclick="showPage('home');return false;">Kex<em>Craft</em> Studio</a><p>India's premier AI-powered web studio. Crafting digital experiences that generate real business results.</p></div>
+    <div class="footer-col"><h5>Services</h5><ul><li><a href="#" onclick="showPage('services');return false;">Website Design</a></li><li><a href="#" onclick="showPage('services');return false;">E-Commerce</a></li><li><a href="#" onclick="showPage('services');return false;">AI Chatbot</a></li><li><a href="#" onclick="showPage('services');return false;">WhatsApp Bot</a></li><li><a href="#" onclick="showPage('services');return false;">SEO Services</a></li><li><a href="#" onclick="showPage('services');return false;">Branding</a></li></ul></div>
+    <div class="footer-col"><h5>Company</h5><ul><li><a href="#" onclick="showPage('about');return false;">About Us</a></li><li><a href="#portfolio" onclick="setTimeout(()=>document.getElementById('portfolio').scrollIntoView({behavior:'smooth'}),10);return false;">Portfolio</a></li><li><a href="#pricing" onclick="setTimeout(()=>document.getElementById('pricing').scrollIntoView({behavior:'smooth'}),10);return false;">Pricing</a></li><li><a href="#" onclick="showPage('blog');return false;">Blog</a></li><li><a href="#">Careers</a></li></ul></div>
+    <div class="footer-col"><h5>Connect</h5><ul><li><a href="#">WhatsApp</a></li><li><a href="#">Email Us</a></li><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 KexCraft Studio · Crafted with care in India 🇮🇳</p>
+    <div class="socials"><a href="#" class="soc">📷</a><a href="#" class="soc">💼</a><a href="#" class="soc">🐦</a><a href="#" class="soc">▶️</a></div>
+  </div>
+</footer>
+
+</div><!-- end page-home -->
+
+
+<!-- ╔══════════════════════════════════╗
+     ║         ABOUT PAGE              ║
+     ╚══════════════════════════════════╝ -->
+<div class="page" id="page-about">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="reveal-l">
+        <div class="sec-label">Our Story</div>
+        <h1 class="sec-title">We Build the <em>Digital India</em> of Tomorrow</h1>
+        <p style="color:var(--text3);font-size:1rem;line-height:1.82;font-weight:300;margin-top:16px;">Founded in 2022 by Arjun Mehta from Mumbai, KexCraft Studio was born out of a simple frustration: too many Indian businesses had terrible websites — or none at all. We set out to change that with a simple promise: world-class design, Indian prices, AI-powered results.</p>
+        <p style="color:var(--text3);font-size:1rem;line-height:1.82;font-weight:300;margin-top:16px;">Today we're a team of 8 specialists serving businesses across 20+ Indian cities, having delivered 80+ projects with a 4.9-star rating and a 30-day money-back guarantee.</p>
+      </div>
+      <div class="about-visual reveal-r">
+        <h3>Our Numbers</h3>
+        <div class="about-stat-row">
+          <div class="about-stat"><span class="about-stat-n">80+</span><div class="about-stat-l">Projects Done</div></div>
+          <div class="about-stat"><span class="about-stat-n">20+</span><div class="about-stat-l">Cities Served</div></div>
+          <div class="about-stat"><span class="about-stat-n">4.9★</span><div class="about-stat-l">Client Rating</div></div>
+          <div class="about-stat"><span class="about-stat-n">3 Yrs</span><div class="about-stat-l">Experience</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-mission">
+    <div class="mission-inner reveal">
+      <blockquote>"Every Indian business deserves a world-class digital presence — regardless of size or budget."</blockquote>
+      <div class="mission-text">
+        <p style="margin-bottom:20px;">Our mission is to democratize premium web design and AI technology for Indian businesses. We believe that a local restaurant in Pune deserves the same quality website as a funded startup in Bangalore.</p>
+        <p style="margin-bottom:20px;">We combine deep design expertise with cutting-edge AI tools to deliver results that most agencies charge 10x more for — and we back everything with our 30-day money-back guarantee.</p>
+        <p>We're not just a vendor. We're your long-term digital growth partner.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="values-section">
+    <div class="ct reveal">
+      <div class="sec-label c">What Drives Us</div>
+      <h2 class="sec-title">Our Core <em>Values</em></h2>
+    </div>
+    <div class="values-grid reveal">
+      <div class="value-card"><span class="value-ico">🎯</span><h3>Results Over Aesthetics</h3><p>Beautiful design is worthless if it doesn't convert visitors into customers. Every decision we make is tied to your business goals.</p></div>
+      <div class="value-card"><span class="value-ico">🤝</span><h3>Radical Transparency</h3><p>Fixed prices. Clear timelines. No jargon. No surprises. You always know exactly what you're getting and what you're paying.</p></div>
+      <div class="value-card"><span class="value-ico">🤖</span><h3>AI-First Thinking</h3><p>We don't use AI as a gimmick. We embed it deeply into every project to give your business an unfair competitive advantage.</p></div>
+      <div class="value-card"><span class="value-ico">🇮🇳</span><h3>Built for India</h3><p>WhatsApp-first, UPI-native, Hindi-ready. We understand the Indian market deeply and build solutions that actually work here.</p></div>
+      <div class="value-card"><span class="value-ico">⚡</span><h3>Speed Without Compromise</h3><p>7-day delivery is our standard, not our exception. We move fast because we know your business can't wait.</p></div>
+      <div class="value-card"><span class="value-ico">♾️</span><h3>Long-Term Partnership</h3><p>We measure success not by project completion, but by your business growth. Our relationship starts where other agencies stop.</p></div>
+    </div>
+  </div>
+
+  <!-- Team on about page -->
+  <section class="team-bg">
+    <div class="ct reveal"><div class="sec-label c">The Team</div><h2 class="sec-title">The People <em>Behind the Magic</em></h2></div>
+    <div class="team-grid reveal">
+      <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,var(--cream2),var(--parchment));">👨‍💻</div><div class="team-body"><div class="team-name">Arjun Mehta</div><div class="team-role">Founder & Lead Developer</div><div class="team-bio">6+ years building full-stack web apps and AI integrations. IIT Bombay. Led 80+ successful projects.</div><div class="team-socials"><a href="#" class="ts">💼</a><a href="#" class="ts">🐦</a></div></div></div>
+      <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#e8d5c0,#d4bfa0);">👩‍🎨</div><div class="team-body"><div class="team-name">Priya Sharma</div><div class="team-role">Creative Director</div><div class="team-bio">Award-winning designer, 5 years crafting luxury brand identities and conversion-focused interfaces.</div><div class="team-socials"><a href="#" class="ts">💼</a><a href="#" class="ts">📷</a></div></div></div>
+      <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#c8d8e8,#a8c0d8);">👨‍📊</div><div class="team-body"><div class="team-name">Rohit Verma</div><div class="team-role">SEO & Marketing Head</div><div class="team-bio">Google-certified. 200+ businesses ranked Page 1. ₹10Cr+ ad spend managed.</div><div class="team-socials"><a href="#" class="ts">💼</a><a href="#" class="ts">🐦</a></div></div></div>
+      <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#d0e8d0,#b0d0b0);">👩‍💼</div><div class="team-body"><div class="team-name">Sneha Patel</div><div class="team-role">Client Success Manager</div><div class="team-bio">Your direct point of contact. Every project delivered on time, on budget, beyond expectations.</div><div class="team-socials"><a href="#" class="ts">💼</a></div></div></div>
+    </div>
+  </section>
+
+  <div class="cta-strip">
+    <h2>Ready to Work with <em>India's Best?</em></h2>
+    <p>Free consultation, no commitment. Let's talk about your project.</p>
+    <div class="hero-btns"><a href="#" onclick="showPage('home');setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),150);return false;" class="btn-g">Start a Conversation →</a></div>
+  </div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="#" class="logo" onclick="showPage('home');return false;">Kex<em>Craft</em> Studio</a><p>India's premier AI-powered web studio.</p></div>
+      <div class="footer-col"><h5>Services</h5><ul><li><a href="#" onclick="showPage('services');return false;">Website Design</a></li><li><a href="#" onclick="showPage('services');return false;">E-Commerce</a></li><li><a href="#" onclick="showPage('services');return false;">AI Chatbot</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#" onclick="showPage('home');return false;">Home</a></li><li><a href="#" onclick="showPage('blog');return false;">Blog</a></li></ul></div>
+      <div class="footer-col"><h5>Connect</h5><ul><li><a href="#">WhatsApp</a></li><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 KexCraft Studio 🇮🇳</p><div class="socials"><a href="#" class="soc">📷</a><a href="#" class="soc">💼</a></div></div>
+  </footer>
+</div>
+
+
+<!-- ╔══════════════════════════════════╗
+     ║       SERVICES PAGE             ║
+     ╚══════════════════════════════════╝ -->
+<div class="page" id="page-services">
+  <div class="service-hero">
+    <div class="sec-label" style="color:var(--gold-l);">What We Offer</div>
+    <h1 class="sec-title" style="color:var(--cream);max-width:700px;margin-top:8px;">75+ Services Across<br><em>8 Core Categories</em></h1>
+    <p class="sec-sub" style="margin-top:14px;">From a simple landing page to a complex AI-powered e-commerce store — we have the expertise and tools to build it, and the track record to prove it.</p>
+    <div style="display:flex;gap:24px;margin-top:36px;flex-wrap:wrap;">
+      <div style="background:rgba(184,146,58,.08);border:1px solid rgba(184,146,58,.18);border-radius:4px;padding:12px 20px;text-align:center;"><div style="font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--gold-l);">75+</div><div style="font-size:.68rem;color:rgba(234,220,180,.45);letter-spacing:1px;text-transform:uppercase;">Services</div></div>
+      <div style="background:rgba(184,146,58,.08);border:1px solid rgba(184,146,58,.18);border-radius:4px;padding:12px 20px;text-align:center;"><div style="font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--gold-l);">8</div><div style="font-size:.68rem;color:rgba(234,220,180,.45);letter-spacing:1px;text-transform:uppercase;">Categories</div></div>
+      <div style="background:rgba(184,146,58,.08);border:1px solid rgba(184,146,58,.18);border-radius:4px;padding:12px 20px;text-align:center;"><div style="font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--gold-l);">80+</div><div style="font-size:.68rem;color:rgba(234,220,180,.45);letter-spacing:1px;text-transform:uppercase;">Projects Done</div></div>
+    </div>
+  </div>
+  <div class="svc-page-grid">
+    <div class="svc-page-card"><span class="svc-page-ico">🌐</span><h3>Website Design & Development</h3><p>Custom mobile-first websites built to convert. From corporate sites to niche portals — every pixel crafted with purpose.</p><span class="svc-page-tag">10 Sub-services</span><div class="svc-page-price">Starting ₹9,999</div></div>
+    <div class="svc-page-card"><span class="svc-page-ico">🛒</span><h3>E-Commerce Development</h3><p>Complete online stores with UPI payments, inventory, shipping, and AI-powered recommendations that sell 24/7.</p><span class="svc-page-tag">12 Sub-services</span><div class="svc-page-price">Starting ₹19,999</div></div>
+    <div class="svc-page-card"><span class="svc-page-ico">🤖</span><h3>AI Chatbot Integration</h3><p>Custom-trained bots that answer queries, capture leads, and book appointments automatically. Trained on your business data.</p><span class="svc-page-tag">9 Sub-services</span><div class="svc-page-price">Starting ₹4,999</div></div>
+    <div class="svc-page-card"><span class="svc-page-ico">📱</span><h3>WhatsApp Business Automation</h3><p>Official WhatsApp Business API setup with AI chatbot, broadcast campaigns, order tracking, and lead follow-ups.</p><span class="svc-page-tag">10 Sub-services</span><div class="svc-page-price">Starting ₹6,999</div></div>
+    <div class="svc-page-card"><span class="svc-page-ico">📊</span><h3>SEO & Google Ranking</h3><p>AI-powered SEO that gets you on Page 1 and keeps you there. Local SEO, technical SEO, content, and link building.</p><span class="svc-page-tag">11 Sub-services</span><div class="svc-page-price">Starting ₹4,999/mo</div></div>
+    <div class="svc-page-card"><span class="svc-page-ico">🎨</span><h3>Branding & Visual Identity</h3><p>Logo, brand kit, stationery, social media kit, packaging — everything you need to look premium and professional.</p><span class="svc-page-tag">8 Sub-services</span><div class="svc-page-price">Starting ₹3,999</div></div>
+    <div class="svc-page-card"><span class="svc-page-ico">📈</span><h3>Digital Marketing & Paid Ads</h3><p>Google Ads, Meta Ads, YouTube Ads, retargeting campaigns — ROI-focused with monthly reports on every rupee spent.</p><span class="svc-page-tag">8 Sub-services</span><div class="svc-page-price">Starting ₹7,999/mo</div></div>
+    <div class="svc-page-card"><span class="svc-page-ico">🔧</span><h3>Maintenance & Support</h3><p>Security, backups, speed checks, content updates, and emergency support. Your site always healthy and current.</p><span class="svc-page-tag">7 Sub-services</span><div class="svc-page-price">Starting ₹1,499/mo</div></div>
+  </div>
+  <div class="cta-strip">
+    <h2>Need a <em>Custom Package?</em></h2>
+    <p>Mix and match any services. We'll build the perfect solution for your budget and goals.</p>
+    <div class="hero-btns"><a href="#" onclick="showPage('home');setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),150);return false;" class="btn-g">Get Custom Quote →</a></div>
+  </div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="#" class="logo" onclick="showPage('home');return false;">Kex<em>Craft</em> Studio</a><p>India's premier AI-powered web studio.</p></div>
+      <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="#" onclick="showPage('home');return false;">Home</a></li><li><a href="#" onclick="showPage('about');return false;">About</a></li><li><a href="#" onclick="showPage('blog');return false;">Blog</a></li></ul></div>
+      <div class="footer-col"><h5>Connect</h5><ul><li><a href="#">WhatsApp</a></li><li><a href="#">Instagram</a></li></ul></div>
+      <div class="footer-col"><h5>Contact</h5><ul><li><a href="#">hello@Kexcraftstudio.in</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 KexCraft Studio 🇮🇳</p></div>
+  </footer>
+</div>
+
+
+<!-- ╔══════════════════════════════════╗
+     ║         BLOG PAGE               ║
+     ╚══════════════════════════════════╝ -->
+<div class="page" id="page-blog">
+  <div class="blog-page-hero">
+    <div class="sec-label">Knowledge Hub</div>
+    <h1 class="blog-page-hero-h" style="font-family:var(--serif);font-size:clamp(2.2rem,5vw,4rem);font-weight:600;letter-spacing:-2px;color:var(--deep);margin:10px 0 10px;">Digital Growth <em style="font-style:italic;color:var(--gold);">Insights</em></h1>
+    <p style="color:var(--text3);font-size:.97rem;max-width:520px;line-height:1.78;font-weight:300;">Practical tips, case studies, and strategies to grow your Indian business online — from our team of experts.</p>
+  </div>
+  <div class="blog-page-grid">
+    <!-- Featured article -->
+    <div class="blog-feat">
+      <div class="blog-feat-img">📊</div>
+      <div class="blog-feat-body">
+        <span class="blog-feat-cat">Featured · SEO</span>
+        <h2>How to Rank Your Local Business on Google in 30 Days: The Complete 2025 Guide</h2>
+        <p>A step-by-step guide to Local SEO for Indian businesses — from Google My Business setup to getting your first Page 1 ranking without spending a rupee on ads.</p>
+        <div style="font-size:.78rem;color:rgba(234,220,180,.4);margin-bottom:16px;">March 10, 2025 · 5 min read · Rohit Verma</div>
+        <a href="#" class="blog-feat-link">Read Full Article <span>→</span></a>
+      </div>
+    </div>
+    <!-- Regular articles -->
+    <div class="blog-card">
+      <div class="blog-img" style="background:linear-gradient(135deg,#0c2a3a,#1a4a5a);">🤖<div class="blog-cat">AI</div></div>
+      <div class="blog-body">
+        <div class="blog-meta"><span class="blog-date">March 5, 2025</span><span class="blog-read">7 min read</span></div>
+        <div class="blog-title">WhatsApp Automation: 100 Leads/Month on Autopilot</div>
+        <div class="blog-excerpt">The exact setup we use for clients generating consistent leads without manual effort.</div>
+        <a href="#" class="blog-link">Read Article <span>→</span></a>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-img" style="background:linear-gradient(135deg,#2a1a00,#4a3010);">💰<div class="blog-cat">Business</div></div>
+      <div class="blog-body">
+        <div class="blog-meta"><span class="blog-date">Feb 28, 2025</span><span class="blog-read">4 min read</span></div>
+        <div class="blog-title">₹10,000 vs ₹1,00,000 Website: The Real Difference</div>
+        <div class="blog-excerpt">An honest breakdown of what you get at different price points and why quality pays.</div>
+        <a href="#" class="blog-link">Read Article <span>→</span></a>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-img" style="background:linear-gradient(135deg,#1a2a1a,#2a4a2a);">🛒<div class="blog-cat">E-Commerce</div></div>
+      <div class="blog-body">
+        <div class="blog-meta"><span class="blog-date">Feb 20, 2025</span><span class="blog-read">6 min read</span></div>
+        <div class="blog-title">Why 70% of Indian E-Commerce Stores Fail in Year 1</div>
+        <div class="blog-excerpt">The 5 critical mistakes that kill online stores and exactly how to avoid each one.</div>
+        <a href="#" class="blog-link">Read Article <span>→</span></a>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-img" style="background:linear-gradient(135deg,#2a1a2a,#4a2a4a);">🎨<div class="blog-cat">Design</div></div>
+      <div class="blog-body">
+        <div class="blog-meta"><span class="blog-date">Feb 15, 2025</span><span class="blog-read">5 min read</span></div>
+        <div class="blog-title">5 Website Design Trends Dominating India in 2025</div>
+        <div class="blog-excerpt">From AI-powered personalization to micro-animations — what's working for Indian businesses right now.</div>
+        <a href="#" class="blog-link">Read Article <span>→</span></a>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-img" style="background:linear-gradient(135deg,#1a1a2a,#2a2a4a);">📱<div class="blog-cat">Social</div></div>
+      <div class="blog-body">
+        <div class="blog-meta"><span class="blog-date">Feb 10, 2025</span><span class="blog-read">3 min read</span></div>
+        <div class="blog-title">Instagram vs Website: Where Should Your Business Invest First?</div>
+        <div class="blog-excerpt">The definitive answer every small business owner in India needs to hear in 2025.</div>
+        <a href="#" class="blog-link">Read Article <span>→</span></a>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;padding:0 0 64px;"><p style="color:var(--text3);font-size:.86rem;">Want expert digital growth tips every week? <a href="#" style="color:var(--gold);text-decoration:none;font-weight:600;">Subscribe to our newsletter →</a></p></div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="#" class="logo" onclick="showPage('home');return false;">Kex<em>Craft</em> Studio</a><p>India's premier AI-powered web studio.</p></div>
+      <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="#" onclick="showPage('home');return false;">Home</a></li><li><a href="#" onclick="showPage('about');return false;">About</a></li><li><a href="#" onclick="showPage('services');return false;">Services</a></li></ul></div>
+      <div class="footer-col"><h5>Connect</h5><ul><li><a href="#">WhatsApp</a></li><li><a href="#">Instagram</a></li></ul></div>
+      <div class="footer-col"><h5>Contact</h5><ul><li><a href="#">hello@Kexcraftstudio.in</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 KexCraft Studio 🇮🇳</p></div>
+  </footer>
+</div>
+
+
+<!-- ═══════════════ ALL JAVASCRIPT ═══════════════ -->
+<script>
+/* ── Cursor ── */
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.transform=`translate(${mx-4}px,${my-4}px)`;
+});
+(function loop(){
+  rx+=(mx-rx)*.11;ry+=(my-ry)*.11;
+  curR.style.transform=`translate(${rx-16}px,${ry-16}px)`;
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button,.tab-btn,.faq-q,.svc-hdr,.blog-card,.team-card,.case-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{curR.style.width='44px';curR.style.height='44px';});
+  el.addEventListener('mouseleave',()=>{curR.style.width='32px';curR.style.height='32px';});
+});
+
+/* ── HERO PARTICLES ── */
+const particleContainer=document.getElementById('heroParticles');
+for(let i=0;i<30;i++){
+  const p=document.createElement('div');
+  p.className='particle';
+  p.style.cssText=`left:${Math.random()*100}%;--dur:${6+Math.random()*8}s;--del:${Math.random()*8}s;`;
+  particleContainer.appendChild(p);
+}
+
+/* ── PAGE NAVIGATION ── */
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  // Re-trigger reveals on new page
+  setTimeout(()=>{
+    document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>{
+      if(!el.classList.contains('vis')){
+        const rect=el.getBoundingClientRect();
+        if(rect.top<window.innerHeight)el.classList.add('vis');
+      }
+    });
+  },100);
+}
+
+/* ── NAV SCROLL EFFECT ── */
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('mainNav');
+  if(window.scrollY>50)nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+  // sticky bar
+  const bar=document.getElementById('stickyBar');
+  if(window.scrollY>600)bar.classList.add('vis');
+  else bar.classList.remove('vis');
+});
+
+/* ── COUNTDOWN ── */
+let total=23*3600+59*60+47;
+setInterval(()=>{
+  if(total<=0)return;total--;
+  const h=Math.floor(total/3600),m=Math.floor((total%3600)/60),s=total%60;
+  const el=document.getElementById('countdown');
+  if(el)el.textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+},1000);
+
+/* ── EXIT POPUP ── */
+let popupShown=false;
+document.addEventListener('mouseleave',e=>{
+  if(e.clientY<10&&!popupShown){popupShown=true;document.getElementById('exitPopup').classList.add('show');}
+});
+setTimeout(()=>{if(!popupShown){popupShown=true;document.getElementById('exitPopup').classList.add('show');}},35000);
+function closePopup(){document.getElementById('exitPopup').classList.remove('show');}
+
+/* ── AI CHAT WIDGET ── */
+const chatResponses={
+  'price':['Our packages start at ₹9,999 for a 5-page website. For e-commerce stores, we start at ₹19,999. Would you like a custom quote?','We have 3 packages: Starter (₹9,999), Growth (₹24,999), and Enterprise (₹49,999). All include mobile-responsive design and SEO setup!'],
+  'time':['Most websites are ready in 3–7 days! Landing pages can be done in 24 hours. E-commerce stores take 7–10 days.','We\'re known for fast delivery. A standard 5-page site takes 3–5 business days.'],
+  'ecommerce':['Yes! We build full e-commerce stores with Razorpay/UPI payments, inventory management, shipping integration, and WhatsApp order alerts. Starting at ₹19,999.','Absolutely! Our e-commerce stores include 12 specialized services including AI product recommendations and multi-language support.'],
+  'quote':['I\'ll connect you with our team right away! Please share your name and phone number, or scroll down to the contact form and we\'ll get back within 2 hours.','Great! Our team will send you a detailed proposal within 24 hours. You can also WhatsApp us directly at +91 XXXXX XXXXX!'],
+  'default':['That\'s a great question! Our team specializes in AI-powered websites for Indian businesses. Would you like to know about our pricing, timelines, or specific services?','I\'d love to help! You can also reach our team directly on WhatsApp for immediate assistance. Is there anything specific about our services you\'d like to know?']
+};
+let chatOpen=false;
+function toggleChat(){
+  chatOpen=!chatOpen;
+  const win=document.getElementById('chatWindow');
+  if(chatOpen){win.classList.add('open');document.getElementById('chatBtn').textContent='✕';}
+  else{win.classList.remove('open');document.getElementById('chatBtn').textContent='🤖';}
+}
+function quickReply(text){
+  addMsg(text,'user');
+  setTimeout(()=>{
+    const key=text.toLowerCase().includes('price')||text.toLowerCase().includes('cost')?'price':
+              text.toLowerCase().includes('time')||text.toLowerCase().includes('long')?'time':
+              text.toLowerCase().includes('ecom')||text.toLowerCase().includes('store')?'ecommerce':
+              text.toLowerCase().includes('quote')?'quote':'default';
+    const responses=chatResponses[key];
+    addMsg(responses[Math.floor(Math.random()*responses.length)],'bot');
+  },700);
+}
+function sendChat(){
+  const inp=document.getElementById('chatInput');
+  const text=inp.value.trim();
+  if(!text)return;
+  addMsg(text,'user');
+  inp.value='';
+  setTimeout(()=>{
+    const key=text.toLowerCase().includes('price')||text.toLowerCase().includes('cost')||text.toLowerCase().includes('rupee')?'price':
+              text.toLowerCase().includes('time')||text.toLowerCase().includes('day')||text.toLowerCase().includes('long')?'time':
+              text.toLowerCase().includes('ecom')||text.toLowerCase().includes('store')||text.toLowerCase().includes('shop')?'ecommerce':
+              text.toLowerCase().includes('quote')||text.toLowerCase().includes('contact')?'quote':'default';
+    const responses=chatResponses[key];
+    addMsg(responses[Math.floor(Math.random()*responses.length)],'bot');
+  },800);
+}
+function addMsg(text,type){
+  const msgs=document.getElementById('chatMessages');
+  const div=document.createElement('div');
+  div.className=`chat-msg ${type}`;
+  div.textContent=text;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+/* ── SERVICE ACCORDION ── */
+function toggleCat(id){
+  const el=document.getElementById(id);
+  const isOpen=el.classList.contains('open');
+  document.querySelectorAll('.svc-cat').forEach(c=>c.classList.remove('open'));
+  if(!isOpen)el.classList.add('open');
+}
+
+/* ── PORTFOLIO TABS ── */
+function showDemo(id,btn){
+  document.querySelectorAll('.demo-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('demo-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ── FAQ ── */
+function toggleFaq(el){
+  const item=el.parentElement;
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen)item.classList.add('open');
+}
+
+/* ── ROI CALCULATOR ── */
+function calcROI(){
+  const v=parseInt(document.getElementById('visitors').value)||500;
+  const val=parseInt(document.getElementById('avgValue').value)||2000;
+  const conv=parseFloat(document.getElementById('convRate').value)||1;
+  const curRev=Math.round((v*(conv/100))*val);
+  const newConv=conv*2.5;
+  const newRev=Math.round((v*(newConv/100))*val);
+  const extra=newRev-curRev;
+  const roi=Math.round((extra*12/24999)*100);
+  const animate=(id,val,prefix='₹',suffix='')=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.textContent=prefix+val.toLocaleString()+suffix;
+  };
+  animate('currentRev',curRev);
+  animate('newRev',newRev);
+  document.getElementById('extraRev').textContent='+₹'+extra.toLocaleString()+'/mo';
+  document.getElementById('yearRoi').textContent=roi.toLocaleString()+'%';
+}
+calcROI();
+
+/* ── FORM SUBMIT ── */
+function submitForm(btn){
+  btn.textContent='✦ Sent! We\'ll contact you within 2 hours.';
+  btn.style.background='#5a8a5a';
+  btn.disabled=true;
+}
+
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+},{threshold:.06});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>obs.observe(el));
+
+/* ── NAV ACTIVE ON SCROLL ── */
+const secs=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY+100;
+  secs.forEach(s=>{
+    if(y>=s.offsetTop&&y<s.offsetTop+s.offsetHeight){
+      document.querySelectorAll('.nav-links a').forEach(a=>a.style.color='');
+      const a=document.querySelector(`.nav-links a[href="#${s.id}"]`);
+      if(a&&!a.classList.contains('nav-cta'))a.style.color='var(--gold)';
+    }
+  });
+});
+
+/* ── SMOOTH SECTION LINKS ── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const target=document.querySelector(a.getAttribute('href'));
+    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'});}
+  });
+});
+</script>
+</body>
+</html>
